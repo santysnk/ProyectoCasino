@@ -75,3 +75,102 @@ async function jugar() {
 }
 
 jugar();
+
+
+/*import readline from 'readline';
+
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+type Carta = {
+    suit: string;
+    value: string;
+    rank: number;
+};
+
+const suits = ['♠', '♥', '♦', '♣'];
+const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+
+function crearMazo(): Carta[] {
+    const deck: Carta[] = [];
+    values.forEach((value, index) => {
+        suits.forEach((suit) => {
+            deck.push({
+                suit,
+                value,
+                rank: index + 4
+            });
+        });
+    });
+    return deck;
+}
+
+function shuffle(deck: Carta[]): Carta[] {
+    for (let i = deck.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [deck[i], deck[j]] = [deck[j], deck[i]];
+    }
+    return deck;
+}
+
+function askQuestion(query: string): Promise<string> {
+    return new Promise(resolve => rl.question(query, resolve));
+}
+
+async function jugar() {
+    let balance = 100;
+    let deck = shuffle(crearMazo());
+
+    console.log("🃏 Bienvenido a Mayor o Menor");
+    console.log(/*sincronizar con saldo ingresado*);
+
+    while (balance > 0) {
+        if (deck.length < 2) {
+            console.log("Mezclando un nuevo mazo...");
+            deck = shuffle(crearMazo());
+        }
+
+        const cartaActual = deck.pop()!;
+        console.log(`\nCarta actual: ${cartaActual.value}${cartaActual.suit}`);
+
+        const guess = (await askQuestion("¿La siguiente carta será (m)ayor o (n)menor? ")).toLowerCase();
+        const betStr = await askQuestion("¿Cuánto deseas apostar? ");
+        const bet = parseInt(betStr);
+
+        if (isNaN(bet) || bet <= 0 || bet > balance) {
+            console.log("Apuesta inválida.");
+            continue;
+        }
+
+        const siguienteCarta = deck.pop()!;
+        console.log(`siguien Carta: ${siguienteCarta.value}${siguienteCarta.suit}`);
+
+        const won = (
+            (guess === 'm' && siguienteCarta.rank > cartaActual.rank) ||
+            (guess === 'n' && siguienteCarta.rank < cartaActual.rank)
+        );
+
+        if (siguienteCarta.rank === cartaActual.rank) {
+            console.log("¡Empate! Pierdes la apuesta.");
+            balance -= bet;
+        } else if (won) {
+            console.log("🎉 ¡Ganaste!");
+            balance += bet;
+        } else {
+            console.log("😢 Perdiste.");
+            balance -= bet;
+        }
+
+        console.log(`Saldo actual: $${balance}`);
+
+        const again = (await askQuestion("¿Deseas seguir jugando? (s/n): ")).toLowerCase();
+        if (again !== 's') break;
+    }
+
+    console.log("Gracias por jugar. Tu saldo final es: $" + balance);
+    rl.close();
+}
+
+jugar();*/
