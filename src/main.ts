@@ -1,5 +1,5 @@
 import * as rs from 'readline-sync';
-import { Casino } from './clases/Casino';
+import { Casino } from './Clases/Casino';
 
 const casino = new Casino();
 
@@ -12,10 +12,10 @@ function mostrarMenuPrincipal() {
         console.log("|            🎰 Bienvenido al Casino La Rula te seca 🎰           |");              
         console.log("+-----------------------------------------------------------------+\n");
         console.log(`[ 💰 Saldo actual: $${casino.obtenerSaldo()} ]\n`);
-        console.log("-----------------------------------");
+        console.log("-------------------------------------------------");
         console.log("1. Cargar créditos");
-        console.log("2. Jugar Tragamonedas de Frutas");
-        console.log("3. Jugar Blackjack");
+        console.log("2. Jugar Tragamonedas");
+        console.log("3. Jugar Mayor-Menor");
         console.log("4. Jugar Rueda de la Fortuna");
         console.log("0. Salir");
         console.log("-----------------------------------");
