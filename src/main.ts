@@ -1,7 +1,8 @@
 import * as rs from 'readline-sync';
 import { Casino } from './Clases/Casino';
+import { mostrarMenuTragamonedas } from './Juegos/Tragamonedas/menuTragamonedas';
 
-const casino = new Casino();
+const casino = Casino.getInstance(); 
 
 function mostrarMenuPrincipal() {
     let salir:boolean = false;
@@ -14,7 +15,7 @@ function mostrarMenuPrincipal() {
         console.log(`[ 💰 Saldo actual: $${casino.obtenerSaldo()} ]\n`);
         console.log("-------------------------------------------------");
         console.log("1. Cargar créditos");
-        console.log("2. Jugar Tragamonedas de Frutas");
+        console.log("2. Jugar Tragamonedas");
         console.log("3. Jugar Blackjack");
         console.log("4. Jugar Rueda de la Fortuna");
         console.log("0. Salir");
@@ -37,7 +38,7 @@ function mostrarMenuPrincipal() {
                 break;
 
             case 2:
-               // casino.jugarTragamonedas();
+                    mostrarMenuTragamonedas(casino) 
                 break;
 
             case 3:
