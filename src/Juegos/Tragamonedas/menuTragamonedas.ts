@@ -1,6 +1,7 @@
 import * as rs from 'readline-sync';
+import { Casino } from '../../Clases/Casino';
 
-function mostrarMenuTragamonedas() {
+export function mostrarMenuTragamonedas(pCasino:Casino) {
     let salir:boolean = false;
 
     while (!salir) {
@@ -8,10 +9,10 @@ function mostrarMenuTragamonedas() {
         console.log("+--------------------------------------------------------------------------------------+");
         console.log("|     1. [ 🍇 TRAGAMONEDAS DE FRUTAS 🍒 ]      2. [ 🍸 TRAGAMONEDAS DE BAR 🍷 ]      |");              
         console.log("+--------------------------------------------------------------------------------------+\n");
-        //console.log(`[ 💰 Saldo actual: $${casino.obtenerSaldo()} ]\n`);
+        console.log(`[ 💰 Saldo actual: $${pCasino.obtenerSaldo()} ]\n`);
         console.log("-----------------------------------");
         console.log("1. Jugar Tragamonedas de Frutas");
-        console.log("2. Jugar Tragamonedas de Frutas");
+        console.log("2. Jugar Tragamonedas Bar");
         console.log("0. Salir");
         console.log("-----------------------------------");
 
@@ -29,7 +30,7 @@ function mostrarMenuTragamonedas() {
 
             case 0:
                 console.log("👋 Gracias por visitar el casino. ¡Hasta luego!");
-            //    casino.guardarSaldoEnArchivo();
+                pCasino.guardarSaldoEnArchivo();
                 salir = true;
                 break;
 
@@ -41,4 +42,3 @@ function mostrarMenuTragamonedas() {
     }
 }
 
-// probando

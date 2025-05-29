@@ -3,16 +3,24 @@ import * as rs from 'readline-sync';
 
 
 export class Casino {
+    private static instancia: Casino | null = null;  // 1. única instancia
     private saldo: number;
-
-
-    constructor() {
+    
+    // 2. constructor privado para evitar `new Casino()` desde afuera
+    private constructor() {
         this.saldo = leerSaldo();
-
     }
 
-    cargarCreditos(monto: number): void {
-        this.saldo += monto;
+    // 3. método público para obtener la instancia única
+    public static getInstance(): Casino {
+        if (this.instancia === null) {
+            this.instancia = new Casino();
+        }
+        return this.instancia;
+    }
+
+    cargarCreditos(pMonto: number): void {
+        this.saldo += pMonto;
     }
 
     obtenerSaldo(): number {
@@ -23,15 +31,15 @@ export class Casino {
         guardarSaldo(this.saldo);
     }
 
-    private descontarApuesta(apuesta: number): boolean {
-        if (apuesta > this.saldo) {
+    descontarApuesta(pApuesta: number): boolean {
+        if (pApuesta > this.saldo) {
             console.log("❌ No tenés saldo suficiente.");
             rs.question("Presione ENTER para volver al menú...");
             return false;
         }
-        this.saldo -= apuesta;
+            this.saldo -= pApuesta;
         return true;
     }
 
-    
+
 }
