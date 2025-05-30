@@ -1,5 +1,7 @@
 import * as rs from 'readline-sync';
 import { Casino } from '../../Clases/Casino';
+import { mostrarMenuFrutas } from './menuFrutas';
+
 
 export function mostrarMenuTragamonedas(pCasino:Casino) {
     let salir:boolean = false;
@@ -20,7 +22,7 @@ export function mostrarMenuTragamonedas(pCasino:Casino) {
 
         switch (opcion) {
             case 1:
-
+                mostrarMenuFrutas(pCasino)
                 break;
 
             case 2:

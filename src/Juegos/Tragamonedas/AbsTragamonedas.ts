@@ -4,23 +4,42 @@ import { Casino } from '../../Clases/Casino';
 export abstract class Tragamonedas implements IJuego { 
     protected casino : Casino;
     protected nombre : string;
+    protected apuesta : number;
+    protected simbolos: string[];
+    protected matriz : string[][];
+    protected premios:number[];
+    protected Ganado:number; 
 
-    constructor (pCasino: Casino) {
+    constructor (pCasino: Casino, pNombre:string, pSimbolos:string[]) {
+        this.nombre = pNombre;
         this.casino = pCasino;
-        this.nombre = "Tragamonedas";
+        this.apuesta = 0;
+        this.simbolos = pSimbolos;
+        this.matriz = this.matriz = [];
+        this.premios = []; 
+        this.Ganado = 0;
     }
 
-
-    validarApuesta(pApuesta : number) : void {
-        this.casino.descontarApuesta(pApuesta);
+    getApuesta():number{
+        return this.apuesta
     }
 
-
-    pagarPremio(pPremio : number) : void{
-
+    setApuesta(pApuesta : number){
+        this.apuesta = pApuesta;
     }
+
+    getGanado():number{
+        return this.Ganado
+    }
+
+    
+    abstract mostrarMatriz(): void ;
+
+    abstract mostrarMatrizDemo(): void;
 
     abstract jugar() : void
+
+    abstract pagarPremio() : void
 
 
 }
