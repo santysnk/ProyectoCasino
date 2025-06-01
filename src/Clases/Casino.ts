@@ -1,5 +1,6 @@
-import { Tragamonedas } from "../Juegos/Tragamonedas/AbsTragamonedas";
-import { TragamonedasFrutas } from "../Juegos/Tragamonedas/TragamonedasFrutas";
+import { Tragamonedas } from "../Juegos/Tragamonedas/Clases/AbsTragamonedas";
+import { TragamonedasBar } from "../Juegos/Tragamonedas/Clases/TragamonedasBar";
+import { TragamonedasFrutas } from "../Juegos/Tragamonedas/Clases/TragamonedasFrutas";
 import { leerSaldo, guardarSaldo } from "../utils/ArchivoTxt";
 import * as rs from 'readline-sync';
 
@@ -14,7 +15,7 @@ export class Casino {
         this.saldo = leerSaldo();
         this.juegosTragamonedas = [];  // inicializamos el array vacío
         this.juegosTragamonedas.push(new TragamonedasFrutas(this));  // pasamos this como referencia del casino
-    
+        this.juegosTragamonedas.push(new TragamonedasBar(this));     // pasamos this como referencia del casino
     }
 
     // 3. método público para obtener la instancia única
@@ -49,6 +50,10 @@ export class Casino {
 
     getTragamonedasFrutas(){
         return this.juegosTragamonedas[0];
+    }
+
+    getTragamonedasBar(){
+        return this.juegosTragamonedas[1];
     }
 
 

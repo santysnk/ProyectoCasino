@@ -1,15 +1,17 @@
 import { Tragamonedas } from "./AbsTragamonedas";
-import { Casino } from "../../Clases/Casino";
+import { Casino } from "../../../Clases/Casino";
 import * as rs from 'readline-sync';
 
 export class TragamonedasFrutas extends Tragamonedas {
-    
+    private cantFilas: number;
+    private cantColumnas: number;
 
     constructor(pCasino: Casino) {
         const simbol = ["🍒", "🍋", "🍉", "🍇", "🍓"];
         super(pCasino, "Tragamonedas de Frutas",simbol);
         this.premios = [];
-        
+        this.cantFilas = 5;
+        this.cantColumnas = 5;
     }
 
     getSimbolos():string[]{
@@ -24,10 +26,10 @@ export class TragamonedasFrutas extends Tragamonedas {
         const simbolos = this.getSimbolos();     // Obtenemos el array de frutas definido en la clase (🍒, 🍋, 🍉, 🍇, 🍓)
         const resultado: string[][] = [];        // Creamos una matriz vacía que contendrá 5 filas, cada una con 5 frutas
 
-        for (let i = 0; i < simbolos.length; i++) {
+        for (let c = 0; c < this.cantColumnas; c++) {
             const fila: string[] = [];  // Creamos una nueva fila vacía
 
-            for (let u = 0; u < simbolos.length; u++) {
+            for (let f = 0; f < this.cantFilas; f++) {
 
                 // Elegimos un indice al azar
                 const indice = Math.floor(Math.random() * simbolos.length);

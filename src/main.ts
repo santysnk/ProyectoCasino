@@ -16,10 +16,10 @@ function mostrarMenuPrincipal() {
         console.log("-------------------------------------------------");
         console.log("1. Cargar créditos");
         console.log("2. Jugar Tragamonedas");
-        console.log("3. Jugar Blackjack");
+        console.log("3. Jugar Mayor o Menor");
         console.log("4. Jugar Rueda de la Fortuna");
         console.log("0. Salir");
-        console.log("-----------------------------------");
+        console.log("-------------------------------------------------");
 
         const opcion:number = rs.questionInt("Seleccione una opcion: ");
 

@@ -7,7 +7,6 @@ export function mostrarMenuFrutas(pCasino:Casino) {
     let jugarOk : boolean = false;
 
     const frutas = pCasino.getTragamonedasFrutas();
-   
 
     while (!salir) {
         console.clear();
@@ -15,7 +14,7 @@ export function mostrarMenuFrutas(pCasino:Casino) {
         console.log("|     🍓 🍉    TRAGAMONEDAS DE FRUTAS   🍒 🍋 🍇    |");
         console.log("+---------------------------------------------------+");
         frutas.mostrarMatriz() ;
-        console.log(`[ 💰 Saldo actual: $${pCasino.obtenerSaldo()} , Ganado ultima apuesta: $${frutas.getGanado()- frutas.getApuesta()}]\n`);
+        console.log(`[ 💰 Saldo actual: $${pCasino.obtenerSaldo()} , Ganado ultima apuesta: $${frutas.getGanado() - frutas.getApuesta()} ]\n`);
         console.log("-----------------------------------");
         console.log("1. Apostar 10 creditos");
         console.log("2. Apostar 50 creditos");

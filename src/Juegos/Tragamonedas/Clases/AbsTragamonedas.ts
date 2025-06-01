@@ -1,5 +1,5 @@
-import { IJuego } from "../InterfaceJuego";
-import { Casino } from '../../Clases/Casino';
+import { IJuego } from "../../InterfaceJuego";
+import { Casino } from '../../../Clases/Casino';
 
 export abstract class Tragamonedas implements IJuego { 
     protected casino : Casino;
