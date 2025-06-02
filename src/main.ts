@@ -1,6 +1,6 @@
 import * as rs from 'readline-sync';
 import { Casino } from './Clases/Casino';
-import { mostrarMenuTragamonedas } from './Juegos/Tragamonedas/menuTragamonedas';
+import { mostrarMenuTragamonedas } from './Juegos/Tragamonedas/Menu/menuTragamonedas';
 
 const casino = Casino.getInstance(); 
 
