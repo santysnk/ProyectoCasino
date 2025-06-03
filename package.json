@@ -1,6 +1,11 @@
 {
+  "type" : "commonjs",
+  "scripts": {
+    "start": "ts-node src/main.ts"
+  },
   "dependencies": {
     "file-system": "^2.2.2",
+    "random-js": "^2.1.0",
     "readline-sync": "^1.4.10"
   },
   "devDependencies": {

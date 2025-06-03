@@ -1,6 +1,7 @@
 import * as rs from 'readline-sync';
 import { Casino } from './Clases/Casino';
 import { mostrarMenuTragamonedas } from './Juegos/Tragamonedas/menuTragamonedas';
+import { mostrarMenuRuleta } from './Juegos/Ruleta/menuRuleta';
 
 const casino = Casino.getInstance(); 
 
@@ -17,7 +18,7 @@ function mostrarMenuPrincipal() {
         console.log("1. Cargar créditos");
         console.log("2. Jugar Tragamonedas");
         console.log("3. Jugar Blackjack");
-        console.log("4. Jugar Rueda de la Fortuna");
+        console.log("4. Jugar Ruleta");
         console.log("0. Salir");
         console.log("-----------------------------------");
 
@@ -46,7 +47,7 @@ function mostrarMenuPrincipal() {
                 break;
 
             case 4:
-               // casino.jugarRuedaFortuna();
+                    mostrarMenuRuleta(casino)
                 break;
 
             case 0:
