@@ -25,12 +25,9 @@ export function mostrarMenuTragamonedas(pCasino:Casino) {
             case 1:
                 mostrarMenuFrutas(pCasino)
                 break;
-
             case 2:
                 mostrarMenuBar(pCasino)
                 break;
-
-
             case 0:
                 salir = true;
                 break;
