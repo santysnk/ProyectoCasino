@@ -4,7 +4,7 @@ import rs from 'readline-sync';
 
 /**mensaje de bienvenida y inicio */
 async function caraCruz() {
-    console.log("bienvenido haz tu apuesta");
+    console.log("🎲 Bienvenido al juego de Cara o Cruz (con Doble o Nada) 🎲");
 }
 
 /**mensaje de pregunta para apostar */
@@ -28,11 +28,11 @@ function mostrarMenuElegirCara() {
 
     while (!salir) {
         console.clear();
-        console.log("1.Elegir Cara 🟢");
-        console.log("2.Elegir Cruz 🔴");
+        console.log("1.Elegir Cara 🟩");
+        console.log("2.Elegir Cruz 🟥");
         console.log("0. Atras");
 
-        const opcion: number = rs.questionInt("Seleccione una opcion"); // Uso de readlineSync para entrada numérica
+        const opcion: number = rs.questionInt("Seleccione una opcion"); 
 
         switch (opcion) {
             case 1: break;
@@ -43,7 +43,7 @@ function mostrarMenuElegirCara() {
                 break;
             default:
                 console.log("❌ Opción inválida.");
-                rs.question("Presione ENTER para continuar..."); // Uso de readlineSync para pausa
+                rs.question("enter para continuar");
                 break;
         }
     }
@@ -62,6 +62,18 @@ function obtenerUnoODos(): string {
 }
 let miNumeroAleatorio: string = obtenerUnoODos();
 console.log(miNumeroAleatorio);
+
+/*incluir doble o nada PENDIENTE */
+const quiereDobleONada = rs.question("¿Quieres jugar 'doble o nada'?").trim().toLowerCase();
+if (quiereDobleONada === 's'){}
+    const $Resultado = obtenerUnoODos();
+    console.log ("la moneda cayó en: " + {$Resultado});
+    if (miNumeroAleatorio === $Resultado) {
+        console.log("ganaste el doble");
+    } else {
+        console.log("perdiste todo con doble o nada");
+    }
+
 
 /*anotar en drae.io funcion de partidas ganadas o perdidas*/
 async function jugarCaraOCruz() {
