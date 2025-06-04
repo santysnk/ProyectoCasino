@@ -83,4 +83,3 @@ async function jugarCaraOCruz() {
     console.log(`\n"Juego terminado. Ganaste" ${ganadas} "vez/veces y perdiste" ${perdidas}.`);
 }
 jugarCaraOCruz();
-
