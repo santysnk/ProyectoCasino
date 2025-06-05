@@ -36,14 +36,17 @@ function mostrarMenuElegirCara() {
 
         switch (opcion) {
             case 1: 
-                eleccion = "🤑"
+                eleccion = "1";
+                console.log("Has elegido Cara 🟩");
+                
                 break;
 
-            case 2: 
-                eleccion = "☠"
+            case 2: "2";
+                eleccion = "Has elegido Cruz 🟥";
                 break;
 
             case 0:
+                eleccion = "0";
                 console.log("Gracias por jugar");
                 salir = true;
                 break;
