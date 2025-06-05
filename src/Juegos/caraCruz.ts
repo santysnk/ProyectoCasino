@@ -32,8 +32,7 @@ function mostrarMenuElegirCara() {
         console.log("2.Elegir Cruz 🟥");
         console.log("0. Atras");
 
-        const opcion: number = rs.questionInt("Seleccione una opcion"); 
-
+        const opcion: number = rs.questionInt("Seleccione una opcion");
         switch (opcion) {
             case 1: break;
             case 2: break;
@@ -52,8 +51,6 @@ function mostrarMenuElegirCara() {
 /**es para tiro al azar en el juego */ /**si el valor es entre 0 y 0.5 va cara si es mayor entre 0.5 y 1 es cruz */
 function obtenerUnoODos(): string {
     let numeroAleatorio = Math.random();
-    console.log(numeroAleatorio);
-
     if (numeroAleatorio >= 0 && numeroAleatorio < 0.5) {
         return "🤑";
     } else {
