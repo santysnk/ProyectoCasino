@@ -1,6 +1,6 @@
 import { Tragamonedas } from "./AbsTragamonedas";
 import { Casino } from "../../../Clases/Casino";
-import * as rs from 'readline-sync';
+
 
 export class TragamonedasFrutas extends Tragamonedas {
     private cantFilas: number;
