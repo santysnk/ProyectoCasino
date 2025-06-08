@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Casino = void 0;
-var ArchivoTxt_1 = require("../utils/ArchivoTxt");
+var ArchivoTxt_1 = require("../../../utils/ArchivoTxt");
 var rs = require("readline-sync");
 var Casino = /** @class */ (function () {
     function Casino() {

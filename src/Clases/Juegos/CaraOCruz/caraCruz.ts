@@ -1,6 +1,5 @@
-
-
 import rs from 'readline-sync';
+import { Casino } from '../Casino/Casino';
 
 let eleccion:string = "";
 
@@ -20,6 +19,18 @@ while (true) {
 }
 
 /**menu para elegir cara o cruz */
+class CaraCruz {
+    private casino: Casino;
+
+    constructor(casino: Casino) {
+        this.casino = casino;
+    }
+
+    jugar() {
+        mostrarMenuElegirCara();
+    }
+}
+
 function mostrarMenuElegirCara() {
     let salir: boolean = false;
 
