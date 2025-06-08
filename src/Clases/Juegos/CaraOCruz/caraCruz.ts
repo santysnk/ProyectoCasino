@@ -19,7 +19,7 @@ while (true) {
 }
 
 /**menu para elegir cara o cruz */
-class CaraCruz {
+export class juegoCaraCruz {
     private casino: Casino;
 
     constructor(casino: Casino) {
@@ -92,19 +92,51 @@ if (caraAleaterio === eleccion){
 }
 
 /*incluir doble o nada PENDIENTE */
-const quiereDobleONada = rs.question("¿Quieres jugar 'doble o nada'?, ingrese (si) para jugar: ").trim().toLowerCase();
+export class CaraCruz {
+    private casino: Casino;
 
+    constructor(casino: Casino) {
+        this.casino = casino;
+    }
 
-if (quiereDobleONada === "si"){
-    const $Resultado = obtenerUnoODos();
-    console.log ("la moneda cayó en: " + {$Resultado});
-    if (caraAleaterio === $Resultado) {
-        console.log("ganaste el doble");
-    } else {
-        console.log("perdiste todo");
+    jugar() {
+        mostrarMenuElegirCara();
     }
 }
+    let salir: boolean = false;
 
+    while (!salir) {
+        console.clear();
+        console.log("🎲 Bienvenido al juego de Cara o Cruz (con Doble o Nada) 🎲");
+        console.log("------------------------------------------------------------\n");
+        console.log("1. Elegir Cara 🟩");
+        console.log("2. Elegir Cruz 🟥");
+        console.log("0. Atras");
+
+        const opcion: number = rs.questionInt("Seleccione una opcion: "); 
+
+        switch (opcion) {
+            case 1: 
+                eleccion = "1";
+                console.log("Has elegido Cara 🟩");
+                break;
+
+            case 2:
+                eleccion = "Has elegido Cruz 🟥";
+                break;
+
+            case 0:
+                eleccion = "0";
+                console.log("Gracias por jugar");
+                salir = true;
+                break;
+
+            default:
+                console.log("❌ Opción inválida.");
+                rs.question("enter para continuar..");
+                break;
+        }
+    }
 /*anotar en drae.io funcion de partidas ganadas o perdidas*/
 async function jugarCaraOCruz() {
     let ganadas: Number = 0;
