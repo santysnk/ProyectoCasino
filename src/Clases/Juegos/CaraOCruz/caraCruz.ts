@@ -1,5 +1,5 @@
 import rs from 'readline-sync';
-import { Casino } from '../Casino/Casino';
+import { Casino } from '../../../../Casino';
 
 let eleccion:string = "";
 

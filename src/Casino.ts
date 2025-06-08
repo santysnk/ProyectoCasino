@@ -1,5 +1,5 @@
-import { caraCruz } from 
-import { leerSaldo, guardarSaldo } from "../../../utils/ArchivoTxt";
+import { caraCruz } from "./src/Clases/Juegos/CaraOCruz"; 
+import { leerSaldo, guardarSaldo } from "./utils/ArchivoTxt";
 import * as rs from 'readline-sync';
 
 
