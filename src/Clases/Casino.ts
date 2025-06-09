@@ -1,3 +1,4 @@
+import { Ruleta } from "../Juegos/Ruleta/ruleta";
 // Importación de módulos necesarios
 import { Tragamonedas } from "../Juegos/Tragamonedas/Clases/AbsTragamonedas";
 import { TragamonedasBar } from "../Juegos/Tragamonedas/Clases/TragamonedasBar";
@@ -11,6 +12,11 @@ import * as rs from 'readline-sync';
  * Gestiona el saldo del jugador y los juegos disponibles.
  */
 export class Casino {
+    private static instancia: Casino | null = null;  // 1. única instancia
+    private saldo: number;
+    private ruleta: Ruleta;
+    
+    // 2. constructor privado para evitar `new Casino()` desde afuera
     // Implementación del patrón Singleton
     private static instancia: Casino | null = null;  // Almacena la única instancia
     
@@ -23,6 +29,11 @@ export class Casino {
      * Carga el saldo desde archivo e inicializa los juegos disponibles.
      */
     private constructor() {
+        this.saldo = leerSaldo();
+        this.ruleta = new Ruleta (this);
+    }
+
+    // 3. método público para obtener la instancia única
         this.saldo = leerSaldo();  // Carga el saldo guardado
         this.juegosTragamonedas = [];  // Inicializa el array de juegos vacío
         
@@ -75,6 +86,8 @@ export class Casino {
      */
     descontarApuesta(pApuesta: number): boolean {
         if (pApuesta > this.saldo) {
+            console.log("❌ No tenés saldo suficiente.");
+            rs.question("Presione ENTER para volver al menu...");
             console.log("❌ No tienes saldo suficiente.");
             rs.question("Presione ENTER para volver al menu...");
             return false;
@@ -82,6 +95,11 @@ export class Casino {
         this.saldo -= pApuesta;
         return true;
     }
+
+    getRuleta(){
+        return this.ruleta
+    }
+
 
     /**
      * Obtiene la instancia del juego de Tragamonedas de Frutas.

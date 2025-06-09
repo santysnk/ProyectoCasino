@@ -1,12 +1,8 @@
-// Importación de módulos necesarios
-import * as rs from 'readline-sync'; // Para la entrada del usuario por consola
-import { Casino } from './Clases/Casino'; // Clase principal del casino
-import { mostrarMenuTragamonedas } from './Juegos/Tragamonedas/Menu/menuTragamonedas'; // Menú de tragamonedas
+import * as rs from 'readline-sync';
+import { Casino } from './Clases/Casino';
+import { mostrarMenuTragamonedas } from './Juegos/Tragamonedas/menuTragamonedas';
+import { mostrarMenuRuleta } from './Juegos/Ruleta/menuRuleta';
 
-/**
- * Obtiene la instancia única del casino usando el patrón Singleton
- * Esto asegura que solo exista una instancia del casino en toda la aplicación
- */
 const casino = Casino.getInstance(); 
 
 /**
@@ -34,8 +30,8 @@ function mostrarMenuPrincipal() {
         console.log("-------------------------------------------------");
         console.log("1. Cargar créditos");
         console.log("2. Jugar Tragamonedas");
-        console.log("3. Jugar Mayor o Menor");
-        console.log("4. Jugar Rueda de la Fortuna");
+        console.log("3. Jugar Blackjack");
+        console.log("4. Jugar Ruleta");
         console.log("0. Salir");
         console.log("-------------------------------------------------");
 
@@ -67,8 +63,8 @@ function mostrarMenuPrincipal() {
                 // casino.jugarBlackjack();
                 break;
 
-            case 4: // Jugar Rueda de la Fortuna (actualmente deshabilitado)
-                // casino.jugarRuedaFortuna();
+            case 4:
+                    mostrarMenuRuleta(casino)
                 break;
 
             case 0: // Salir del juego
