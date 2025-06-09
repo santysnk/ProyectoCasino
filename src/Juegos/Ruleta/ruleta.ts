@@ -1,13 +1,13 @@
 import { Casino } from "../../Clases/Casino";
-import * as rs from "readline-sync";
+import * as rs from "readline-sync";//instale biblioteca readline-sync para ingresar las apuestas del usuario y los montos respectivamente
 import { IJuego } from "../InterfaceJuego";
-import { Random } from "random-js";
+import { Random } from "random-js";//instale biblioteca random-js para recibir  elemento aleatorio que me dara el numero ganador cuando gire la ruleta
 
 
 export class Ruleta implements IJuego{
     private casino:Casino;      
-    private panio: { [clave: string]:{ paridad: `par` | `impar`| `ninguno` , color: `rojo` | `negro` | `ninguno`}}
-    private apuestas: { Apuesta: string ; Monto : number } [];
+    private panio: { [clave: string]:{ paridad: `par` | `impar`| `ninguno` , color: `rojo` | `negro` | `ninguno`}} //objeto literal que tiene una calve con valores definidos (paridad y color)
+    private apuestas: { Apuesta: string ; Monto : number } []; // objeto literal de tipo arreglo para almacenar cada apuesta con su monto respectivo
     private numeroGanador:string;
     private colorGanador:string;
     private paridadGanadora:string;
@@ -66,7 +66,7 @@ export class Ruleta implements IJuego{
 
 
     girarRuleta():string{
-        const bolilla = new Random();
+        const bolilla = new Random(); //uso la biblioteca random-js y creo una nueva instancia bolilla para usar el metodo.pick y que girarRuleta me devuelva un elemento de los que le di de forma aleatoria
         let acierto = bolilla.pick([
             "00", "0", "1", "2", "3", "4", "5", "6", "7",
             "8", "9", "10", "11", "12", "13", "14", "15", "16", "17",
@@ -77,12 +77,12 @@ export class Ruleta implements IJuego{
     }
 
     jugar(){
-        this.numeroGanador = this.girarRuleta();        
+        this.numeroGanador = this.girarRuleta();    //lamo al metodo girarRuleta que me retorna un elemento "ganador"
 
-        //buscar paridad y color en el paño
-        let {paridad,color} = this.panio[this.numeroGanador];
+        //busco paridad y color en el paño
+        let {paridad,color} = this.panio[this.numeroGanador]; // uso ese elemento "ganador" para buscar la paridad y el color correspondiente a la clave que salio al girarRuleta()
 
-        //guardar en variables
+        //lo guardo en variables
         this.paridadGanadora = paridad;
         this.colorGanador = color;
         console.log(`###########################################################`);
@@ -91,9 +91,9 @@ export class Ruleta implements IJuego{
         console.log(`   Paridad: >> ${this.paridadGanadora.toUpperCase()} << `);
         console.log(`###########################################################`);
         
-        rs.question("\nPresione ENTER para continuar...\n");
+        rs.question("\nPresione ENTER para continuar...\n");//uso a modo de pausa para que el usuario pueda leer la jugada ganadora
 
-        if(this.apuestas.length > 0 ){
+        if(this.apuestas.length > 0 ){//si existe la apuesta se calcula el premio y se guarda en la variable ganancia 
             this.ganancia = this.calcularPremio()
             if (this.ganancia > 0){
                 console.log(`+-------------------------------------------------------+`);
@@ -102,25 +102,25 @@ export class Ruleta implements IJuego{
                 
                 this.pagarPremio(this.ganancia);
                 rs.question("\nPresione ENTER para continuar...");
-                this.apuestas = []
+                this.apuestas = []//reasigno el valor de apuestas a arreglo vacio para una nueva jugada
             }else{
                 console.log(`Sin suerte :( has perdido: $ ${this.montoApostado} `);
                 rs.question("\nPresione ENTER para continuar...");
-                this.apuestas = []
+                this.apuestas = []//reasigno el valor de apuestas a arreglo vacio para una nueva jugada
             }
-            this.montoApostado = 0;
+            this.montoApostado = 0;//reasigno el valor de monto apostado a cero para una nueva jugada
         }
     }
 
-    pagarPremio(pPremio:number):void{
+    pagarPremio(pPremio:number):void{//recibo la ganancia y lo cargo en forma de credito al saldo del usuario cuando llamo al metodo cargarCredito()
         this.casino.cargarCreditos(pPremio)
     }
 
-    getMontoApostado():number{
+    getMontoApostado():number{//uso el get para llamar al metodo(privado) en el menu ruleta y asi mostrar el monto que aposto el usuario
         return this.montoApostado
     }
 
-    setApuesta(pApuesta: number): void {
+    setApuesta(pApuesta: number): void {//uso un acumulador para sumar el monto de cada apuesta
         this.montoApostado += pApuesta;
     }
 
@@ -129,16 +129,16 @@ export class Ruleta implements IJuego{
 
         if(this.apuestas.length > 0 ){
             for(let i = 0;i < this.apuestas.length; i++){
-                this.setApuesta(this.apuestas[i].Monto);
+                this.setApuesta(this.apuestas[i].Monto);//si hay apuesta recorro el arreglo apuestas y tomo el monto de cada apuesta para acumularlas con el metodo setApuesta()
             }
         }
     }
 
     calcularPremio(): number {
-        let pagar: number = 0;
+        let pagar: number = 0;//creo la variable pagar para usarla como acumulador 
 
         for (let i = 0; i < this.apuestas.length; i++) {
-            const auxApuesta = this.apuestas[i];
+            const auxApuesta = this.apuestas[i];// uso un auxiliar que me va a servir para traerme el monto de cada apuesta y multiplicarlo por el valor que le quiero dar al premio
 
             if (this.numeroGanador === auxApuesta.Apuesta) {
                 pagar += auxApuesta.Monto * 36; // acierta número
@@ -267,7 +267,7 @@ export class Ruleta implements IJuego{
         }
     }   
 
-    mostrarApuestas(){
+    mostrarApuestas(){//muestro en forma de tabla cada una de las apuestas
         if (this.apuestas.length > 0){
             console.table(this.apuestas)
         }
