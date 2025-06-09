@@ -1,6 +1,6 @@
 import * as rs from 'readline-sync';
 import { Casino } from './Clases/Casino';
-import { mostrarMenuTragamonedas } from './Juegos/Tragamonedas/menuTragamonedas';
+import { mostrarMenuTragamonedas } from './Juegos/Tragamonedas/Menu/menuTragamonedas';
 import { mostrarMenuRuleta } from './Juegos/Ruleta/menuRuleta';
 
 const casino = Casino.getInstance(); 
@@ -64,6 +64,7 @@ function mostrarMenuPrincipal() {
                 break;
 
             case 4:
+					// Muestra el menú de Ruleta pasando la instancia del casino
                     mostrarMenuRuleta(casino)
                 break;
 

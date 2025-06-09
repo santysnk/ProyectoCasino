@@ -15,13 +15,6 @@ export class Casino {
     private static instancia: Casino | null = null;  // 1. única instancia
     private saldo: number;
     private ruleta: Ruleta;
-    
-    // 2. constructor privado para evitar `new Casino()` desde afuera
-    // Implementación del patrón Singleton
-    private static instancia: Casino | null = null;  // Almacena la única instancia
-    
-    // Atributos de la clase
-    private saldo: number;                          // Saldo actual del jugador
     private juegosTragamonedas: Tragamonedas[];     // Lista de juegos de tragamonedas disponibles
     
     /**
@@ -31,18 +24,14 @@ export class Casino {
     private constructor() {
         this.saldo = leerSaldo();
         this.ruleta = new Ruleta (this);
-    }
-
-    // 3. método público para obtener la instancia única
-        this.saldo = leerSaldo();  // Carga el saldo guardado
-        this.juegosTragamonedas = [];  // Inicializa el array de juegos vacío
-        
-        // Agrega los juegos de tragamonedas disponibles
+		this.juegosTragamonedas = [];  // Inicializa el array de juegos vacío
+		// Agrega los juegos de tragamonedas disponibles
         // Se pasa 'this' como referencia al casino para permitir la comunicación
         this.juegosTragamonedas.push(new TragamonedasFrutas(this));
         this.juegosTragamonedas.push(new TragamonedasBar(this));
     }
 
+    
     /**
      * Método estático para obtener la instancia única del Casino.
      * Si no existe, crea una nueva instancia.
