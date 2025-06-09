@@ -1,7 +1,7 @@
 import * as rs from 'readline-sync';
 import { Casino } from './Clases/Casino';
-
-const casino = new Casino();
+import { mostrarMenuCaraCruz } from './Juegos/CaraCruz/Menu/menuCaraCruz';
+const casino = Casino.getInstance(); 
 
 function mostrarMenuPrincipal() {
     let salir:boolean = false;
@@ -14,11 +14,11 @@ function mostrarMenuPrincipal() {
         console.log(`[ 💰 Saldo actual: $${casino.obtenerSaldo()} ]\n`);
         console.log("-------------------------------------------------");
         console.log("1. Cargar créditos");
-        console.log("2. Jugar Tragamonedas de Frutas");
-        console.log("3. Jugar Blackjack");
+        console.log("2. Jugar Tragamonedas");
+        console.log("3. Jugar Cara o Cruz");
         console.log("4. Jugar Rueda de la Fortuna");
         console.log("0. Salir");
-        console.log("-----------------------------------");
+        console.log("-------------------------------------------------");
 
         const opcion:number = rs.questionInt("Seleccione una opcion: ");
 
@@ -37,11 +37,12 @@ function mostrarMenuPrincipal() {
                 break;
 
             case 2:
-               // casino.jugarTragamonedas();
+                    mostrarMenuTragamonedas(casino) 
                 break;
 
             case 3:
-               // casino.jugarBlackjack();
+                
+               casino.CaraCruz();
                 break;
 
             case 4:
