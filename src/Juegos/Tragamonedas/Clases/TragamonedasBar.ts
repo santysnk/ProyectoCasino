@@ -24,7 +24,7 @@ export class TragamonedasBar extends Tragamonedas {
 
     /**
      * Crea una nueva instancia del juego de Tragamonedas de Bar.
-     * @param pCasino - Referencia a la instancia del casino.
+     * parametro pCasino - Referencia a la instancia del casino.
      */
     constructor(pCasino: Casino) {
         // Símbolos disponibles: cóctel, cóctel tropical, vino, cerveza, champaña
@@ -47,7 +47,7 @@ export class TragamonedasBar extends Tragamonedas {
 
     /**
      * Obtiene los símbolos disponibles en el juego.
-     * @returns Array con los emojis de tragos.
+     * retorna Array con los emojis de tragos.
      */
     getSimbolos(): string[] {
         return this.simbolos;
@@ -91,9 +91,9 @@ export class TragamonedasBar extends Tragamonedas {
 
     /**
      * Calcula el premio para una fila específica basado en la combinación de símbolos.
-     * @param fila - La fila de símbolos a evaluar.
-     * @param filaIndex - El índice de la fila (0 = superior, 1 = medio, 2 = inferior).
-     * @returns El multiplicador de premio (0 si no hay combinación ganadora).
+     * parametro fila - La fila de símbolos a evaluar.
+     * parametro filaIndex - El índice de la fila (0 = superior, 1 = medio, 2 = inferior).
+     * retorna El multiplicador de premio (0 si no hay combinación ganadora).
      */
     private calcularPremioPorFila(fila: string[], filaIndex: number): number {
         const [simbolo1, simbolo2, simbolo3] = fila;

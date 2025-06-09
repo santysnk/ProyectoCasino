@@ -13,7 +13,7 @@ export class TragamonedasFrutas extends Tragamonedas {
 
     /**
      * Crea una nueva instancia del juego de Tragamonedas de Frutas.
-     * @param pCasino - Referencia a la instancia del casino.
+     * parametro pCasino - Referencia a la instancia del casino.
      */
     constructor(pCasino: Casino) {
         // Símbolos disponibles: cereza, limón, sandía, uva, fresa
@@ -26,7 +26,7 @@ export class TragamonedasFrutas extends Tragamonedas {
 
     /**
      * Obtiene los símbolos disponibles en el juego.
-     * @returns Array con los emojis de frutas.
+     * retorna un Array con los emojis de frutas.
      */
     getSimbolos(): string[] {
         return this.simbolos;
@@ -69,8 +69,8 @@ export class TragamonedasFrutas extends Tragamonedas {
 
     /**
      * Calcula el premio para una fila específica basado en secuencias de símbolos iguales.
-     * @param fila - La fila de símbolos a evaluar.
-     * @returns Un número que representa el multiplicador del premio (0 si no hay premio).
+     * parametro fila - La fila de símbolos a evaluar.
+     * retorna Un número que representa el multiplicador del premio (0 si no hay premio).
      */
     private calcularPremioPorFila(fila: string[]): number {
         let maxRepetidos = 1; // Mínimo de símbolos iguales necesarios para premio

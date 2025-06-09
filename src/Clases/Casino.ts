@@ -35,7 +35,7 @@ export class Casino {
     /**
      * Método estático para obtener la instancia única del Casino.
      * Si no existe, crea una nueva instancia.
-     * @returns La instancia única del Casino
+     * retorna La instancia única del Casino
      */
     public static getInstance(): Casino {
         if (this.instancia === null) {
@@ -46,7 +46,7 @@ export class Casino {
 
     /**
      * Añade créditos al saldo actual del jugador.
-     * @param pMonto - Cantidad de créditos a cargar
+     * parametro pMonto - Cantidad de créditos a cargar
      */
     cargarCreditos(pMonto: number): void {
         this.saldo += pMonto;
@@ -54,7 +54,7 @@ export class Casino {
 
     /**
      * Obtiene el saldo actual del jugador.
-     * @returns El saldo actual
+     * retorna El saldo actual
      */
     obtenerSaldo(): number {
         return this.saldo;
@@ -70,8 +70,8 @@ export class Casino {
 
     /**
      * Intenta descontar una apuesta del saldo actual.
-     * @param pApuesta - Monto a descontar
-     * @returns true si se pudo descontar, false si no hay saldo suficiente
+     * parametro pApuesta - Monto a descontar
+     * retorna true si se pudo descontar, false si no hay saldo suficiente
      */
     descontarApuesta(pApuesta: number): boolean {
         if (pApuesta > this.saldo) {
@@ -85,7 +85,7 @@ export class Casino {
 
     /**
      * Obtiene la instancia del juego de Tragamonedas de Frutas.
-     * @returns Instancia de TragamonedasFrutas
+     * retorna Instancia de TragamonedasFrutas
      */
     getTragamonedasFrutas() {
         return this.juegosTragamonedas[0];
@@ -93,7 +93,7 @@ export class Casino {
 
     /**
      * Obtiene la instancia del juego de Tragamonedas de Bar.
-     * @returns Instancia de TragamonedasBar
+     * retorna Instancia de TragamonedasBar
      */
     getTragamonedasBar() {
         return this.juegosTragamonedas[1];

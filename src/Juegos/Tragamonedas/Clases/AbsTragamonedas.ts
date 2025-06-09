@@ -19,9 +19,9 @@ export abstract class Tragamonedas implements IJuego {
 
     /**
      * Constructor de la clase base Tragamonedas.
-     * @param pCasino - Referencia a la instancia del casino
-     * @param pNombre - Nombre del juego de tragamonedas
-     * @param pSimbolos - Array de símbolos que se usarán en el juego
+     * parametro pCasino - Referencia a la instancia del casino
+     * parametro pNombre - Nombre del juego de tragamonedas
+     * parametro pSimbolos - Array de símbolos que se usarán en el juego
      */
     constructor(pCasino: Casino, pNombre: string, pSimbolos: string[]) {
         this.nombre = pNombre;
@@ -35,7 +35,7 @@ export abstract class Tragamonedas implements IJuego {
 
     /**
      * Obtiene el monto de la apuesta actual.
-     * @returns El monto de la apuesta actual
+     * retorna El monto de la apuesta actual
      */
     getApuesta(): number {
         return this.apuesta;
@@ -43,7 +43,7 @@ export abstract class Tragamonedas implements IJuego {
 
     /**
      * Establece el monto de la apuesta.
-     * @param pApuesta - Monto de la apuesta a establecer
+     * parametro pApuesta - Monto de la apuesta a establecer
      */
     setApuesta(pApuesta: number): void {
         this.apuesta = pApuesta;
@@ -51,7 +51,7 @@ export abstract class Tragamonedas implements IJuego {
 
     /**
      * Obtiene la cantidad ganada en la última jugada.
-     * @returns La cantidad ganada
+     * retorna La cantidad ganada
      */
     getGanado(): number {
         return this.Ganado;
