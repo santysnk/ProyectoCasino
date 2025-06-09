@@ -1,101 +1,140 @@
 import { Tragamonedas } from "./AbsTragamonedas";
 import { Casino } from "../../../Clases/Casino";
 
-
+/**
+ * Clase que implementa un juego de Tragamonedas de Bar.
+ * Extiende la clase abstracta Tragamonedas y define la lógica específica
+ * para el juego con símbolos de tragos y cócteles.
+ * 
+ * Características principales:
+ * - Matriz de 3x3 símbolos
+ * - Sistema de premios basado en símbolos específicos
+ * - Premio doble en la fila del medio
+ */
 export class TragamonedasBar extends Tragamonedas {
-    
-    private cantFilas: number;                            // Cantidad de filas y columnas del juego (3x3)
+    // Dimensiones de la matriz de juego (3x3)
+    private cantFilas: number;
     private cantColumnas: number;
-    private tablaPremios: { [clave: string]: number };    // Objeto literal que actúa como tabla de premios. Cada símbolo tiene asignado un multiplicador base.
+    
+    /**
+     * Tabla de premios que asigna un multiplicador a cada símbolo.
+     * La clave es el emoji del símbolo y el valor es el multiplicador de premio.
+     */
+    private tablaPremios: { [clave: string]: number };
 
+    /**
+     * Crea una nueva instancia del juego de Tragamonedas de Bar.
+     * @param pCasino - Referencia a la instancia del casino.
+     */
     constructor(pCasino: Casino) {
-        const simbol = ["🍸", "🍹", "🍷", "🍺", "🍾"];  // Definimos los símbolos que aparecerán en el tragamonedas
-        super(pCasino, "Tragamonedas de BAR",simbol);
+        // Símbolos disponibles: cóctel, cóctel tropical, vino, cerveza, champaña
+        const simbol = ["🍸", "🍹", "🍷", "🍺", "🍾"];
+        super(pCasino, "Tragamonedas de BAR", simbol);
         this.premios = [];
-        this.cantFilas = 3;
-        this.cantColumnas = 3;
-        this.tablaPremios = {     // Asignamos los multiplicadores para cada símbolo. Se utilizarán para calcular el premio cuando haya una fila con 3 símbolos iguales.
-            "🍸": 2,             // Paga x2
-            "🍹": 3,             // Paga x3
-            "🍺": 4,             // Paga x4
-            "🍷": 5,             // Paga x5
-            "🍾": 10             // Paga x10
+        this.cantFilas = 3;      // 3 filas en la matriz
+        this.cantColumnas = 3;    // 3 columnas en la matriz
+        
+        // Configuración de la tabla de premios
+        this.tablaPremios = {
+            "🍸": 2,    // Cóctel - Paga x2
+            "🍹": 3,    // Cóctel tropical - Paga x3
+            "🍺": 4,    // Cerveza - Paga x4
+            "🍷": 5,    // Vino - Paga x5
+            "🍾": 10    // Champaña - Paga x10 (premio mayor)
         };
     }
 
-    getSimbolos():string[]{
-        return this.simbolos
+
+    /**
+     * Obtiene los símbolos disponibles en el juego.
+     * @returns Array con los emojis de tragos.
+     */
+    getSimbolos(): string[] {
+        return this.simbolos;
     }
 
-
+    /**
+     * Inicia una nueva partida de tragamonedas.
+     * Genera una nueva matriz de símbolos aleatorios y calcula los premios.
+     */
     jugar(): void {
-        this.matriz = [];  //  Reiniciamos la matriz para un nuevo juego
-        this.premios = []; // Limpiar para la próxima jugada
+        // Reiniciamos el estado del juego
+        this.matriz = [];
+        this.premios = [];
 
-        const simbolos = this.getSimbolos();     // Obtenemos el array de tragos definido en la clase (🍸, 🍹, 🍺, 🍷, ☘️)
-        const resultado: string[][] = [];        // Creamos una matriz vacía que contendrá 3 filas, cada una con 3 tragos
+        // Obtenemos los símbolos disponibles
+        const simbolos = this.getSimbolos();
+        // Creamos una matriz vacía para el resultado
+        const resultado: string[][] = [];
 
+        // Generamos la matriz de símbolos aleatorios
         for (let c = 0; c < this.cantColumnas; c++) {
-            const fila: string[] = [];  // Creamos una nueva fila vacía
+            const fila: string[] = [];
 
-            for (let f = 0; f < this.cantFilas ; f++) {
-
-                // Elegimos un indice al azar
+            for (let f = 0; f < this.cantFilas; f++) {
+                // Elegimos un símbolo al azar
                 const indice = Math.floor(Math.random() * simbolos.length);
-
                 fila.push(simbolos[indice]);
             }
 
-            // Agregamos el trago a la fila actual
-            resultado.push(fila); 
+            // Agregamos la fila completa a la matriz de resultados
+            resultado.push(fila);
         }
 
-        this.matriz = resultado; // Guardamos el resultado en el atributo de clase
 
-         // Calcular los premios por fila y guardarlos
+        this.matriz = resultado; // Guardamos la matriz generada
+
+        // Calculamos los premios para cada fila
         this.premios = this.matriz.map((fila, i) => this.calcularPremioPorFila(fila, i));
-        this.pagarPremio();
-
+        this.pagarPremio(); // Procesamos los premios
     }
 
+    /**
+     * Calcula el premio para una fila específica basado en la combinación de símbolos.
+     * @param fila - La fila de símbolos a evaluar.
+     * @param filaIndex - El índice de la fila (0 = superior, 1 = medio, 2 = inferior).
+     * @returns El multiplicador de premio (0 si no hay combinación ganadora).
+     */
     private calcularPremioPorFila(fila: string[], filaIndex: number): number {
-        const simbolo1 = fila[0];
-        const simbolo2 = fila[1];
-        const simbolo3 = fila[2];
+        const [simbolo1, simbolo2, simbolo3] = fila;
 
         // Verificamos si los tres símbolos son iguales
         const hayTresIguales = simbolo1 === simbolo2 && simbolo2 === simbolo3;
         if (!hayTresIguales) {
-            return 0;
+            return 0; // No hay premio si no hay tres símbolos iguales
         }
 
-        // Buscamos el multiplicador base según el símbolo
-        let multiplicadorBase = 0;
-        if (this.tablaPremios.hasOwnProperty(simbolo1)) {
-            multiplicadorBase = this.tablaPremios[simbolo1];
-        }
+        // Obtenemos el multiplicador base según el símbolo
+        const multiplicadorBase = this.tablaPremios[simbolo1] || 0;
 
-        // Si es la fila del medio (filaIndex === 1), se duplica el premio
+        // Si es la fila del medio, duplicamos el premio
         if (filaIndex === 1) {
             return multiplicadorBase * 2;
         }
         return multiplicadorBase;
     }
 
+    /**
+     * Muestra la matriz de juego en la consola con formato.
+     * Incluye indicadores de premio cuando corresponda.
+     */
     mostrarMatriz(): void {
         console.log("+---------------------------------------------------+");
         console.log("|                                                   |");
 
         if (this.matriz?.[0]?.length) {
+            // Mostrar cada fila de la matriz
             for (let i = 0; i < this.matriz.length; i++) {
                 const fila = this.matriz[i];
                 const multiplicador = this.premios?.[i] ?? 0;
 
+                // Creamos la etiqueta del premio si hay un multiplicador
                 let etiqueta = "";
                 if (multiplicador > 0) {
                     etiqueta = `⬅️   x${multiplicador}`;
                 }
 
+                // Formateamos y mostramos la línea
                 const linea = fila.map(f => `[ ${f} ]`).join("   ");
                 console.log("|             " + linea + "              |" + (etiqueta ? ` ${etiqueta}` : ""));
             }
@@ -103,39 +142,52 @@ export class TragamonedasBar extends Tragamonedas {
             console.log("|                                                   |");
             console.log("+---------------------------------------------------+\n");
         } else {
+            // Si no hay matriz, mostramos la demo
             this.mostrarMatrizDemo();
             console.log("|                                                   |");
             console.log("+---------------------------------------------------+\n");
         }
     }
 
+
+    /**
+     * Muestra una matriz de demostración con una disposición específica de símbolos.
+     * Se usa cuando no hay una matriz de juego activa.
+     */
     mostrarMatrizDemo(): void {
+        // Matriz de demostración con símbolos de ejemplo
         const matrizDemo = [
-            ["🍸", "🍷", "🍹"],
-            ["🍾", "🍹", "🍾"],
-            ["🍷", "🍺", "🍸"],
+            ["🍸", "🍷", "🍹"],  // Fila superior
+            ["🍾", "🍹", "🍾"],  // Fila del medio (con posibles premios)
+            ["🍷", "🍺", "🍸"]   // Fila inferior
         ];
 
+        // Mostrar cada fila de la demo
         for (const fila of matrizDemo) {
             const linea = fila.map(f => `[ ${f} ]`).join("   ");
             console.log("|             " + linea + "              |");
         }
     }
 
-
+    /**
+     * Calcula y paga los premios según las combinaciones obtenidas.
+     * Los premios se calculan multiplicando la apuesta por el multiplicador de cada fila ganadora.
+     */
     pagarPremio(): void {
+        // Si no hay premios, salir
         if (!this.premios || this.premios.length === 0) {
             return;
-        }    
-
-        let totalPremio = 0;
-
-        for (let multiplicador of this.premios) {
-            totalPremio += this.apuesta * multiplicador;
         }
+        
+        // Calculamos el premio total sumando los premios de todas las filas
+        let totalPremio = this.premios.reduce((total, multiplicador) => {
+            return total + (this.apuesta * multiplicador);
+        }, 0);
 
+        // Guardamos el total ganado
         this.Ganado = totalPremio;
 
+        // Si hay premio, lo acreditamos al jugador
         if (totalPremio > 0) {
             this.casino.cargarCreditos(totalPremio);
         }
