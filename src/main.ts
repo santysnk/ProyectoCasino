@@ -2,6 +2,7 @@ import * as rs from 'readline-sync';
 import { Casino } from './Clases/Casino';
 import { mostrarMenuTragamonedas } from './Juegos/Tragamonedas/Menu/menuTragamonedas';
 import { mostrarMenuRuleta } from './Juegos/Ruleta/menuRuleta';
+import { mostrarMenuMayorMenor } from './Juegos/mayorMenor/menuMayorMenos';
 
 const casino = Casino.getInstance(); 
 
@@ -60,7 +61,7 @@ function mostrarMenuPrincipal() {
                 break;
 
             case 3: // Jugar Mayor o Menor (actualmente deshabilitado)
-                casino.getMayorMenor().mostrarMazo()
+                mostrarMenuMayorMenor(casino);
                 break;
 
             case 4:

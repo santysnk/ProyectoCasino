@@ -1,16 +1,20 @@
 import * as rs from "readline-sync";
+import { Random } from "random-js";
 import { Casino } from "../../Clases/Casino";
 import { IJuego } from "../InterfaceJuego";
 
 export class mayorMenor implements IJuego{
     private casino:Casino;
     private mazoDeCartas:{nombre:string,palo:string,valor:number}[];
+    private carta:{nombre:string,palo:string,valor:number};  
 
 
 
     constructor(pCasino:Casino){
         this.casino = pCasino;
         this.mazoDeCartas = [];
+        this.construirMazo();
+        this.carta = {nombre: "" , palo: "" , valor: 0}
     }
 
     construirMazo(){
@@ -42,6 +46,26 @@ export class mayorMenor implements IJuego{
         rs.question("presione ENTER para continuar");
         
     }
+
+    getMontoApostado(){
+
+    }
+
+    jugar(pLuz:number){
+        let cartaUsuario = this.obtenerCartaRandom();
+
+        let cartaCasino = this.obtenerCartaRandom();
+        
+        
+    }
+
+    obtenerCartaRandom():{nombre:string,palo:string,valor:number}{
+        const claseRandom = new Random(); 
+        let cartaElegida = claseRandom.pick(this.mazoDeCartas);
+        return cartaElegida;
+    }
+
+    mostrarCartaRandom()
 
     setApuesta(pApuesta: number): void{
 
