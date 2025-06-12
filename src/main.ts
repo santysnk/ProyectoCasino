@@ -30,7 +30,7 @@ function mostrarMenuPrincipal() {
         console.log("-------------------------------------------------");
         console.log("1. Cargar créditos");
         console.log("2. Jugar Tragamonedas");
-        console.log("3. Jugar Blackjack");
+        console.log("3. Jugar Mayor o Menor");
         console.log("4. Jugar Ruleta");
         console.log("0. Salir");
         console.log("-------------------------------------------------");
@@ -60,7 +60,7 @@ function mostrarMenuPrincipal() {
                 break;
 
             case 3: // Jugar Mayor o Menor (actualmente deshabilitado)
-                // casino.jugarBlackjack();
+                casino.getMayorMenor().mostrarMazo()
                 break;
 
             case 4:
