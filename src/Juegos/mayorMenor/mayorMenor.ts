@@ -65,7 +65,9 @@ export class mayorMenor implements IJuego{
         return cartaElegida;
     }
 
-    mostrarCartaRandom()
+    mostrarCartaRandom(){
+        
+    }
 
     setApuesta(pApuesta: number): void{
 
