@@ -3,6 +3,7 @@ import * as rs from "readline-sync"
 
 
 export function mostrarMenuMayorMenor (pCasino:Casino){
+	
     let salir:boolean = false;
 
     const mayorMenor = pCasino.getMayorMenor();
@@ -28,20 +29,20 @@ export function mostrarMenuMayorMenor (pCasino:Casino){
             case 1 :
                 if(pCasino.descontarApuesta(10)){
                     mayorMenor.jugar(10)
-                    rs.question("presione ENTER para continuar");                    
+
                 }
             
                 break
             case 2 :
                 if(pCasino.descontarApuesta(20)){
                     mayorMenor.jugar(20)
-                    rs.question("presione ENTER para continuar");
+                    
                 }
                 break
             case 3 :
                 if(pCasino.descontarApuesta(30)){
                     mayorMenor.jugar(30)
-                    rs.question("presione ENTER para continuar");
+                    
                 }
                 break
             case 0 :
