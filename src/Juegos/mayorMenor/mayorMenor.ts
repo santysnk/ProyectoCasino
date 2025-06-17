@@ -6,15 +6,20 @@ import { IJuego } from "../InterfaceJuego";
 export class mayorMenor implements IJuego{
     private casino:Casino;
     private mazoDeCartas:{nombre:string,palo:string,valor:number}[];
-    private carta:{nombre:string,palo:string,valor:number};  
-
-
+    
+    private luz:number;
+    private verCartaCasino:boolean;
+    private cartaUsuario:{nombre:string,palo:string,valor:number};  
+    private cartaCasino:{nombre:string,palo:string,valor:number}; 
 
     constructor(pCasino:Casino){
         this.casino = pCasino;
         this.mazoDeCartas = [];
         this.construirMazo();
-        this.carta = {nombre: "" , palo: "" , valor: 0}
+        this.luz = 0;
+        this.verCartaCasino = false;
+        this.cartaUsuario = {nombre: "" , palo: "" , valor: 0};
+        this.cartaCasino = {nombre: "" , palo: "" , valor: 0};
     }
 
     construirMazo(){
@@ -42,21 +47,20 @@ export class mayorMenor implements IJuego{
     }
 
     mostrarMazo(){
-        //this.construirMazo();
         console.log(this.mazoDeCartas);
         rs.question("presione ENTER para continuar");
         
     }
 
     getMontoApostado(){
-
+        return this.luz
     }
 
     jugar(pLuz:number){
-        let cartaUsuario = this.obtenerCartaRandom();
-        let cartaCasino = this.obtenerCartaRandom();
-        this.mostrarSubMenu(cartaUsuario,cartaCasino);
-        
+        this.cartaUsuario = this.obtenerCartaRandom();
+        this.cartaCasino = this.obtenerCartaRandom();
+        this.luz += pLuz;
+        this.mostrarSubMenu();
     }
 
     obtenerCartaRandom():{nombre:string,palo:string,valor:number}{
@@ -66,14 +70,13 @@ export class mayorMenor implements IJuego{
     }
 
 
-	mostrarSubMenu( pCartaUsuario:{nombre:string, palo:string, valor:number}, pCartaCasino:{nombre:string,palo:string,valor:number}){
- 		let salir:boolean = false;
-		let verCartaCasino:boolean = false;
+	mostrarSubMenu(){
+        let salir:boolean = false;
 
 		console.clear();
-		this.mostrarCartasConsola(pCartaUsuario,pCartaCasino,verCartaCasino)
+		this.mostrarCartasConsola()
 		console.log("---------------------------------------------------------");
-		
+		console.log(`[  💰 Saldo actual: $${this.casino.obtenerSaldo()} >>> Monto Apostado: $${this.getMontoApostado()} <<<  ]\n`);
 		console.log("1. Ver Carta sin subir apuesta");
 		console.log("2. Subir apuesta");
 		console.log("0. Salir");
@@ -84,31 +87,23 @@ export class mayorMenor implements IJuego{
 		switch(opcion){
 			
 			case 1 :
-				verCartaCasino = true;
-				this.mostrarCartasConsola(pCartaUsuario,pCartaCasino,verCartaCasino);
-				rs.question("presione ENTER para continuar"); 
-				break
+				this.setApuesta(this.luz);
+                break
 			case 2 :
-				let monto:number = rs.questionInt("Ingrese la cantidad a apostar: ");
-				let auxApuesta = this.casino.descontarApuesta(monto);
-				if (auxApuesta){
-					verCartaCasino = true;
-					this.mostrarCartasConsola(pCartaUsuario,pCartaCasino,verCartaCasino);
-
-					if(pCartaUsuario.valor > pCartaCasino.valor){
-						console.log("Ganaste guacho!!!!");
-						console.log();
-						rs.question("presione ENTER para continuar"); 
-					}else if(pCartaUsuario.valor === pCartaCasino.valor){
-						console.log("Saliste hecho.....");
-						console.log();
-						rs.question("presione ENTER para continuar"); 
-					}else{
-						console.log("😢 LOLA-mento....");
-						console.log();
-						rs.question("presione ENTER para continuar"); 
-					}
-				}
+                let validar =false;
+                while(!validar){
+                    let apuesta:number = rs.questionInt("Ingrese la cantidad a apostar: ");
+                
+                    if(this.casino.descontarApuesta(apuesta) && apuesta >= 0){
+                        apuesta += this.luz;
+                        this.setApuesta(apuesta);
+                        this.mostrarCartasConsola();
+                        validar = true;
+                    }else{
+                        console.log("\nEl monto ingresado es incorrecto.");
+                        
+                    }
+                }
 				break
 			case 3 :
 				this.mostrarMazo();
@@ -123,24 +118,46 @@ export class mayorMenor implements IJuego{
 				rs.question("Presione Enter para volver al menu 🆗")
 				break
 		}
-		
-
-
 	}
 
-	mostrarCartasConsola(pCartaUsuario:{nombre:string, palo:string, valor:number}, pCartaCasino:{nombre:string,palo:string,valor:number}, verCartaCasino:boolean){
+    setApuesta(pApuesta: number): void{
+
+        this.verCartaCasino = true;
+        this.mostrarCartasConsola();
+
+        if(this.cartaUsuario.valor > this.cartaCasino.valor){
+            console.log(`Ganaste!!!! Total Ganado: $${pApuesta}`);
+            this.pagarPremio(pApuesta * 2);
+            console.log();
+            rs.question("presione ENTER para continuar"); 
+        }else if(this.cartaUsuario.valor === this.cartaCasino.valor){
+            console.log(`Saliste hecho..... apuesta recuperada: $${pApuesta}`);
+            this.pagarPremio(pApuesta);
+            console.log();
+            rs.question("presione ENTER para continuar"); 
+        }else{
+            console.log(`😢 Sin suerte.... has perdido $${pApuesta}`);
+            this.pagarPremio(0);
+            console.log();
+            rs.question("presione ENTER para continuar"); 
+        }
+            
+
+    };
+
+	mostrarCartasConsola(){
 		console.clear();
-		if(!verCartaCasino){
+		if(!this.verCartaCasino){
 		console.log(`
 +------------------------------------------------+
 |                                                |
 |       CARTA USUARIO                            |
 |       +-----------+                            |
-|       | ${pCartaUsuario.nombre}        |                            |
+|       | ${this.cartaUsuario.nombre}        |                            |
 |       |           |                            |
-|       |    ${pCartaUsuario.palo}      |                            |
+|       |    ${this.cartaUsuario.palo}      |                            |
 |       |           |                            |
-|       |        ${pCartaUsuario.nombre} |                            |
+|       |        ${this.cartaUsuario.nombre} |                            |
 |       +-----------+                            |
 |                                                |
 +------------------------------------------------+
@@ -151,11 +168,11 @@ export class mayorMenor implements IJuego{
 |                                                |
 |       CARTA USUARIO       CARTA CASINO         |
 |       +-----------+       +-----------+        |
-|       | ${pCartaUsuario.nombre}        |       | ${pCartaCasino.nombre}        |        |
+|       | ${this.cartaUsuario.nombre}        |       | ${this.cartaCasino.nombre}        |        |
 |       |           |       |           |        |
-|       |    ${pCartaUsuario.palo}      |       |    ${pCartaCasino.palo}      |        |
+|       |    ${this.cartaUsuario.palo}      |       |    ${this.cartaCasino.palo}      |        |
 |       |           |       |           |        |
-|       |        ${pCartaUsuario.nombre} |       |        ${pCartaCasino.nombre} |        |
+|       |        ${this.cartaUsuario.nombre} |       |        ${this.cartaCasino.nombre} |        |
 |       +-----------+       +-----------+        |
 |                                                |
 +------------------------------------------------+
@@ -164,18 +181,11 @@ export class mayorMenor implements IJuego{
 
 
 	}
-
-
-    mostrarCartaRandom(){
-
-	}
-
-    setApuesta(pApuesta: number): void{
-
-    };
     
     
     pagarPremio(pPremio: number): void{
-
+        this.casino.cargarCreditos(pPremio)
+        this.verCartaCasino = false;
+        this.luz = 0;
     };
 }

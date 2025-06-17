@@ -11,7 +11,7 @@ export function mostrarMenuMayorMenor (pCasino:Casino){
     while(!salir){
         console.clear();
         console.log("+-----------------------------------------------------+");
-        console.log("|          Bienvenido al juego de Mayor o Menor           |");  
+        console.log("|          Bienvenido al juego de Mayor o Menor       |");  
         console.log("+-----------------------------------------------------+");
         console.log(`[  💰 Saldo actual: $${pCasino.obtenerSaldo()} >>> Monto Apostado: $${mayorMenor.getMontoApostado()} <<<  ]\n`);
         console.log("----------------------------------------");
@@ -29,19 +29,18 @@ export function mostrarMenuMayorMenor (pCasino:Casino){
             case 1 :
                 if(pCasino.descontarApuesta(10)){
                     mayorMenor.jugar(10)
-
                 }
             
                 break
             case 2 :
-                if(pCasino.descontarApuesta(20)){
-                    mayorMenor.jugar(20)
+                if(pCasino.descontarApuesta(50)){
+                    mayorMenor.jugar(50)
                     
                 }
                 break
             case 3 :
-                if(pCasino.descontarApuesta(30)){
-                    mayorMenor.jugar(30)
+                if(pCasino.descontarApuesta(100)){
+                    mayorMenor.jugar(100)
                     
                 }
                 break

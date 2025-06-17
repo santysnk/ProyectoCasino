@@ -80,8 +80,6 @@ export class Casino {
         if (pApuesta > this.saldo) {
             console.log("❌ No tenés saldo suficiente.");
             rs.question("Presione ENTER para volver al menu...");
-            console.log("❌ No tienes saldo suficiente.");
-            rs.question("Presione ENTER para volver al menu...");
             return false;
         }
         this.saldo -= pApuesta;
