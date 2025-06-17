@@ -155,9 +155,9 @@ export class Ruleta implements IJuego{
         return pagar;
     }
 
-    validarApuesta(pApuesta : number) : void {
-        this.casino.descontarApuesta(pApuesta);
-    }
+   // validarApuesta(pApuesta : number) : void {
+       // this.casino.descontarApuesta(pApuesta);
+   // }
 
     agregarApuesta(elementoApostado: string, montoApostado: number) {
         const aux = {
