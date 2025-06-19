@@ -47,19 +47,13 @@ export class mayorMenor implements IJuego{
                     palo : auxPalo,
                     valor : c
                 }
-                this.mazoDeCartas.push(auxCarta)
+                this.mazoDeCartas.push(auxCarta);
             }
         }
     }
 
-    mostrarMazo(){
-        console.log(this.mazoDeCartas);
-        rs.question("presione ENTER para continuar");
-        
-    }
-
     getMontoApostado(){
-        return this.luz
+        return this.luz;
     }
 
     // Inicia una nueva ronda del juego
@@ -79,61 +73,72 @@ export class mayorMenor implements IJuego{
     }
 
 
+	// Muestra el submenú de opciones durante el juego
+	// Permite al usuario ver su carta, subir la apuesta o salir del juego
 	mostrarSubMenu(){
-        let salir:boolean = false;
+        let salir:boolean = false;  // Controla el bucle del submenú
 
+		// Muestra la interfaz del submenú
 		console.clear();
-		this.mostrarCartasConsola()
+		this.mostrarCartasConsola()  // Muestra la cartas actual del usuario unicamente
 		console.log("---------------------------------------------------------");
+		// Muestra el saldo actual y el monto apostado
 		console.log(`[  💰 Saldo actual: $${this.casino.obtenerSaldo()} >>> Monto Apostado: $${this.getMontoApostado()} <<<  ]\n`);
+		
+		// Opciones del menú
 		console.log("1. Ver Carta sin subir apuesta");
 		console.log("2. Subir apuesta");
 		console.log("0. Salir");
 		console.log("");
 
+		// Solicita la opción al usuario
 		let opcion:number = rs.questionInt("Seleccione una opcion: ");
 		
+		// Procesa la opción seleccionada
 		switch(opcion){
-			
-			case 1 :
-				this.setApuesta(this.luz);
-                break
-			case 2 :
-                let validar =false;
+			// Opción 1: Ver carta sin aumentar la apuesta
+			case 1:
+				this.setApuesta(this.luz);  // Mantiene la apuesta actual
+                break;
+                
+			// Opción 2: Aumentar la apuesta
+			case 2:
+                let validar = false;  // Controla la validación de la apuesta
                 while(!validar){
+                    // Solicita el monto a apostar
                     let apuesta:number = rs.questionInt("Ingrese la cantidad a apostar: ");
                 
+                    // Verifica si el monto es válido y hay saldo suficiente
                     if(this.casino.descontarApuesta(apuesta) && apuesta >= 0){
-                        apuesta += this.luz;
-                        this.setApuesta(apuesta);
-                        this.mostrarCartasConsola();
-                        validar = true;
+                        apuesta += this.luz;             // Suma la nueva apuesta a la actual
+                        this.setApuesta(apuesta);        // Actualiza el nuevo monto de la apuesta
+                        this.mostrarCartasConsola();     // Muestra las cartas actualizadas
+                        validar = true;                  // Sale del bucle de validación
                     }else{
-                        console.log("\nEl monto ingresado es incorrecto.");
-                        
+                        console.log("\nEl monto ingresado es incorrecto o no tiene saldo suficiente.");
                     }
                 }
-				break
-			case 3 :
-				this.mostrarMazo();
-				break
-			case 0 :
-				console.log("Gracias por visitar el juego de Menor o Mayor, que disfrute su estadia en el Casino La Rula te seca 😄💰🍀");
+				break;
 				
-				salir = true;
-				break
+			// Opción 0: Salir del juego
+			case 0:
+				console.log("Gracias por visitar el juego de Menor o Mayor, que disfrute su estadia en el Casino La Rula te seca 😄💰🍀.");
+				salir = true;  // Activa la bandera para salir del menú
+				break;
+				
+			// Opción por defecto: Entrada no válida
 			default:
-				console.log(" Usted ha ingresado un numero incorrecto 😕 ")
-				rs.question("Presione Enter para volver al menu 🆗")
-				break
+				console.log(" Usted ha ingresado un numero incorrecto 😕 ");
+				rs.question("Presione Enter para volver al menu 🆗");
+				break;
 		}
 	}
 
     // Evalúa el resultado de la apuesta y paga el premio correspondiente
     // parametro pApuesta - Monto total apostado en la ronda
     setApuesta(pApuesta: number): void {
-        this.verCartaCasino = true;  // Muestra la carta del casino
-        this.mostrarCartasConsola();  // Actualiza la visualización
+        this.verCartaCasino = true;       // Muestra la carta del casino
+        this.mostrarCartasConsola();      // Actualiza la visualización
 
         if(this.cartaUsuario.valor > this.cartaCasino.valor) {
             // El usuario gana: paga el doble de lo apostado
@@ -154,6 +159,9 @@ export class mayorMenor implements IJuego{
 
     };
 
+	// Muestra las cartas en la consola con formato
+	// Si verCartaCasino es false, solo muestra la carta del usuario
+	// Si es true, muestra ambas cartas (usuario y casino)
 	mostrarCartasConsola(){
 		console.clear();
 		if(!this.verCartaCasino){
@@ -187,10 +195,7 @@ export class mayorMenor implements IJuego{
 +------------------------------------------------+
 		`);
 		}
-
-
 	}
-    
     
     // Acredita el premio al jugador y reinicia el estado de la ronda
     // parametro pPremio - Monto a acreditar al jugador
