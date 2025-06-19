@@ -5,8 +5,7 @@ import { IJuego } from "../InterfaceJuego";
 
 export class mayorMenor implements IJuego{
     private casino:Casino;
-    private mazoDeCartas:{nombre:string,palo:string,valor:number}[];
-    
+    private mazoDeCartas:{nombre:string,palo:string,valor:number}[];    
     private luz:number;
     private verCartaCasino:boolean;
     private cartaUsuario:{nombre:string,palo:string,valor:number};  
@@ -46,20 +45,17 @@ export class mayorMenor implements IJuego{
         }
     }
 
-    mostrarMazo(){
-        console.log(this.mazoDeCartas);
-        rs.question("presione ENTER para continuar");
-        
-    }
-
     getMontoApostado(){
         return this.luz
     }
+    
+    setLuz(pLuz:number){
+        this.luz = pLuz;
+    }
 
-    jugar(pLuz:number){
+    jugar(){
         this.cartaUsuario = this.obtenerCartaRandom();
         this.cartaCasino = this.obtenerCartaRandom();
-        this.luz += pLuz;
         this.mostrarSubMenu();
     }
 
@@ -105,12 +101,8 @@ export class mayorMenor implements IJuego{
                     }
                 }
 				break
-			case 3 :
-				this.mostrarMazo();
-				break
 			case 0 :
 				console.log("Gracias por visitar el juego de Menor o Mayor, que disfrute su estadia en el Casino La Rula te seca 😄💰🍀");
-				
 				salir = true;
 				break
 			default:
@@ -147,6 +139,7 @@ export class mayorMenor implements IJuego{
 
 	mostrarCartasConsola(){
 		console.clear();
+        
 		if(!this.verCartaCasino){
 		console.log(`
 +------------------------------------------------+
@@ -178,14 +171,12 @@ export class mayorMenor implements IJuego{
 +------------------------------------------------+
 		`);
 		}
-
-
-	}
-    
+	};
     
     pagarPremio(pPremio: number): void{
         this.casino.cargarCreditos(pPremio)
         this.verCartaCasino = false;
         this.luz = 0;
     };
+
 }

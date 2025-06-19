@@ -28,19 +28,22 @@ export function mostrarMenuMayorMenor (pCasino:Casino){
             
             case 1 :
                 if(pCasino.descontarApuesta(10)){
-                    mayorMenor.jugar(10)
+                    mayorMenor.setLuz(10)
+                    mayorMenor.jugar()
                 }
             
                 break
             case 2 :
                 if(pCasino.descontarApuesta(50)){
-                    mayorMenor.jugar(50)
+                    mayorMenor.setLuz(50)
+                    mayorMenor.jugar()
                     
                 }
                 break
             case 3 :
                 if(pCasino.descontarApuesta(100)){
-                    mayorMenor.jugar(100)
+                    mayorMenor.setLuz(100)
+                    mayorMenor.jugar()
                     
                 }
                 break

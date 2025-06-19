@@ -15,4 +15,7 @@ export interface IJuego {
      * parametro pPremio - El monto del premio a pagar.
      */
     pagarPremio(pPremio: number): void;
+
+    jugar():void;
+
 }
