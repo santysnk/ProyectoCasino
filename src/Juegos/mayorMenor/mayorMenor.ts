@@ -1,38 +1,44 @@
 import * as rs from "readline-sync";
 import { Random } from "random-js";
-import { Casino } from "../../Clases/Casino";
+import { Casino } from "../../ClasePrincipal/Casino";
 import { IJuego } from "../InterfaceJuego";
 
+// Clase que implementa el juego Mayor o Menor
+// El jugador apuesta si la próxima carta será mayor o menor que la actual
 export class mayorMenor implements IJuego{
-    private casino:Casino;
-    private mazoDeCartas:{nombre:string,palo:string,valor:number}[];
+    private casino:Casino;  // Instancia del casino para gestionar el saldo
+    private mazoDeCartas:Array<{nombre:string, palo:string, valor:number}>;  // Mazo de cartas del juego
     
-    private luz:number;
-    private verCartaCasino:boolean;
-    private cartaUsuario:{nombre:string,palo:string,valor:number};  
-    private cartaCasino:{nombre:string,palo:string,valor:number}; 
+    private luz:number;  // Monto total apostado en la ronda actual
+    private verCartaCasino:boolean;  // Controla si se debe mostrar la carta del casino
+    private cartaUsuario:{nombre:string, palo:string, valor:number};  // Carta actual del usuario
+    private cartaCasino:{nombre:string, palo:string, valor:number};  // Carta actual del casino
 
+    // Inicializa el juego con una referencia al casino
     constructor(pCasino:Casino){
         this.casino = pCasino;
         this.mazoDeCartas = [];
-        this.construirMazo();
-        this.luz = 0;
-        this.verCartaCasino = false;
-        this.cartaUsuario = {nombre: "" , palo: "" , valor: 0};
-        this.cartaCasino = {nombre: "" , palo: "" , valor: 0};
+        this.construirMazo();  // Construye el mazo de cartas al iniciar
+        this.luz = 0;  // Inicializa la apuesta en 0
+        this.verCartaCasino = false;  // Oculta la carta del casino inicialmente
+        this.cartaUsuario = {nombre: "", palo: "", valor: 0};  // Inicializa carta del usuario
+        this.cartaCasino = {nombre: "", palo: "", valor: 0};  // Inicializa carta del casino
     }
 
+    // Construye el mazo de cartas con los 4 palos y 13 valores cada uno
     construirMazo(){
-        for(let p:number=0; p < 4; p++){
+        // Itera sobre los 4 palos de la baraja
+        for(let p:number = 0; p < 4; p++){
             let auxPalo:string = "";
+            // Asigna el símbolo del palo según el índice
             if(p === 0){
-                auxPalo = "♦️";
+                auxPalo = "♦️";  // Diamantes
             }else if(p === 1){
-                auxPalo = "♣️";
+                auxPalo = "♣️";  // Tréboles
             }else if(p === 2){
-                auxPalo = "♥️";
+                auxPalo = "♥️";  // Corazones
             }else{
-                auxPalo = "♠️"
+                auxPalo = "♠️";  // Picas
             }
 			
             for(let c:number = 1; c <= 13; c++){
@@ -56,14 +62,17 @@ export class mayorMenor implements IJuego{
         return this.luz
     }
 
+    // Inicia una nueva ronda del juego
+    // parametro pLuz - Monto inicial a apostar
     jugar(pLuz:number){
-        this.cartaUsuario = this.obtenerCartaRandom();
-        this.cartaCasino = this.obtenerCartaRandom();
-        this.luz += pLuz;
-        this.mostrarSubMenu();
+        this.cartaUsuario = this.obtenerCartaRandom();  // Reparte carta al usuario
+        this.cartaCasino = this.obtenerCartaRandom();  // Reparte carta al casino
+        this.luz += pLuz;  // Actualiza el monto apostado
+        this.mostrarSubMenu();  // Muestra el menú de juego
     }
 
-    obtenerCartaRandom():{nombre:string,palo:string,valor:number}{
+    // retorna Una carta aleatoria del mazo
+    obtenerCartaRandom(): {nombre: string, palo: string, valor: number} {
         const claseRandom = new Random(); 
         let cartaElegida = claseRandom.pick(this.mazoDeCartas);
         return cartaElegida;
@@ -120,27 +129,27 @@ export class mayorMenor implements IJuego{
 		}
 	}
 
-    setApuesta(pApuesta: number): void{
+    // Evalúa el resultado de la apuesta y paga el premio correspondiente
+    // parametro pApuesta - Monto total apostado en la ronda
+    setApuesta(pApuesta: number): void {
+        this.verCartaCasino = true;  // Muestra la carta del casino
+        this.mostrarCartasConsola();  // Actualiza la visualización
 
-        this.verCartaCasino = true;
-        this.mostrarCartasConsola();
-
-        if(this.cartaUsuario.valor > this.cartaCasino.valor){
+        if(this.cartaUsuario.valor > this.cartaCasino.valor) {
+            // El usuario gana: paga el doble de lo apostado
             console.log(`Ganaste!!!! Total Ganado: $${pApuesta}`);
             this.pagarPremio(pApuesta * 2);
-            console.log();
-            rs.question("presione ENTER para continuar"); 
-        }else if(this.cartaUsuario.valor === this.cartaCasino.valor){
+        } else if(this.cartaUsuario.valor === this.cartaCasino.valor) {
+            // Empate: devuelve la apuesta
             console.log(`Saliste hecho..... apuesta recuperada: $${pApuesta}`);
             this.pagarPremio(pApuesta);
-            console.log();
-            rs.question("presione ENTER para continuar"); 
-        }else{
+        } else {
+            // El usuario pierde: no paga premio
             console.log(`😢 Sin suerte.... has perdido $${pApuesta}`);
             this.pagarPremio(0);
-            console.log();
-            rs.question("presione ENTER para continuar"); 
         }
+        console.log();
+        rs.question("presione ENTER para continuar");
             
 
     };
@@ -183,9 +192,11 @@ export class mayorMenor implements IJuego{
 	}
     
     
-    pagarPremio(pPremio: number): void{
-        this.casino.cargarCreditos(pPremio)
-        this.verCartaCasino = false;
-        this.luz = 0;
+    // Acredita el premio al jugador y reinicia el estado de la ronda
+    // parametro pPremio - Monto a acreditar al jugador
+    pagarPremio(pPremio: number): void {
+        this.casino.cargarCreditos(pPremio);  // Acredita el premio
+        this.verCartaCasino = false;  // Oculta la carta del casino
+        this.luz = 0;  // Reinicia la apuesta
     };
 }

@@ -1,5 +1,5 @@
 import { Tragamonedas } from "./AbsTragamonedas";
-import { Casino } from "../../../Clases/Casino";
+import { Casino } from "../../../ClasePrincipal/Casino";
 
 /**
  * Clase que implementa un juego de Tragamonedas de Frutas.

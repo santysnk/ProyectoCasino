@@ -1,6 +1,6 @@
 // Importación de interfaces y clases necesarias
 import { IJuego } from "../../InterfaceJuego";
-import { Casino } from '../../../Clases/Casino';
+import { Casino } from '../../../ClasePrincipal/Casino';
 
 /**
  * Clase abstracta que representa un juego de Tragamonedas genérico.

@@ -1,5 +1,5 @@
 import * as rs from 'readline-sync';
-import { Casino } from '../../../Clases/Casino';
+import { Casino } from '../../../ClasePrincipal/Casino';
 import { mostrarMenuFrutas } from './menuFrutas';
 import { mostrarMenuBar } from './menuBar';
 
