@@ -30,14 +30,15 @@ export function mostrarMenuMayorMenor(pCasino: Casino) {
         console.log("---------------------------------------- \n");
         
         // Solicita la opción al usuario
-        let opcion: number = rs.questionInt("Seleccione una opción: ");
+        let opcion: number = rs.questionInt("Seleccione una opcion: ");
 
         // Procesa la opción seleccionada por el usuario
         switch (opcion) {
             // Jugar con apuesta inicial (luz) de 10 créditos
             case 1:
                 if (pCasino.descontarApuesta(10)) {
-                    mayorMenor.jugar(10);
+					mayorMenor.setLuz(10)
+                    mayorMenor.jugar();
                 } else {
                     console.log("Saldo insuficiente para esta apuesta.");
                     rs.question("Presione Enter para continuar...");
@@ -47,7 +48,8 @@ export function mostrarMenuMayorMenor(pCasino: Casino) {
             // Jugar con apuesta inicial (luz) de 50 créditos
             case 2:
                 if (pCasino.descontarApuesta(50)) {
-                    mayorMenor.jugar(50);
+					mayorMenor.setLuz(50)
+                    mayorMenor.jugar();
                 } else {
                     console.log("Saldo insuficiente para esta apuesta.");
                     rs.question("Presione Enter para continuar...");
@@ -57,7 +59,8 @@ export function mostrarMenuMayorMenor(pCasino: Casino) {
             // Jugar con apuesta inicial (luz) de 100 créditos
             case 3:
                 if (pCasino.descontarApuesta(100)) {
-                    mayorMenor.jugar(100);
+					mayorMenor.setLuz(100)
+                    mayorMenor.jugar();
                 } else {
                     console.log("Saldo insuficiente para esta apuesta.");
                     rs.question("Presione Enter para continuar...");
@@ -74,7 +77,7 @@ export function mostrarMenuMayorMenor(pCasino: Casino) {
             // Opción no válida
             default:
                 console.log("Usted ha ingresado un número incorrecto 😕");
-                rs.question("Presione Enter para volver al menú 🆗");
+                rs.question("Presione Enter para volver al menu");
                 break;
         }
     }
