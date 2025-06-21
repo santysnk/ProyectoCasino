@@ -1,37 +1,44 @@
 import * as rs from "readline-sync";
 import { Random } from "random-js";
-import { Casino } from "../../Clases/Casino";
+import { Casino } from "../../ClasePrincipal/Casino";
 import { IJuego } from "../InterfaceJuego";
 
+// Clase que implementa el juego Mayor o Menor
+// El jugador apuesta si la próxima carta será mayor o menor que la actual
 export class mayorMenor implements IJuego{
-    private casino:Casino;
-    private mazoDeCartas:{nombre:string,palo:string,valor:number}[];    
-    private luz:number;
-    private verCartaCasino:boolean;
-    private cartaUsuario:{nombre:string,palo:string,valor:number};  
-    private cartaCasino:{nombre:string,palo:string,valor:number}; 
+    private casino:Casino;  // Instancia del casino para gestionar el saldo
+    private mazoDeCartas:Array<{nombre:string, palo:string, valor:number}>;  // Mazo de cartas del juego
+    
+    private luz:number;  // Monto total apostado en la ronda actual
+    private verCartaCasino:boolean;  // Controla si se debe mostrar la carta del casino
+    private cartaUsuario:{nombre:string, palo:string, valor:number};  // Carta actual del usuario
+    private cartaCasino:{nombre:string, palo:string, valor:number};  // Carta actual del casino
 
+    // Inicializa el juego con una referencia al casino
     constructor(pCasino:Casino){
         this.casino = pCasino;
         this.mazoDeCartas = [];
-        this.construirMazo();
-        this.luz = 0;
-        this.verCartaCasino = false;
-        this.cartaUsuario = {nombre: "" , palo: "" , valor: 0};
-        this.cartaCasino = {nombre: "" , palo: "" , valor: 0};
+        this.construirMazo();  // Construye el mazo de cartas al iniciar
+        this.luz = 0;  // Inicializa la apuesta en 0
+        this.verCartaCasino = false;  // Oculta la carta del casino inicialmente
+        this.cartaUsuario = {nombre: "", palo: "", valor: 0};  // Inicializa carta del usuario
+        this.cartaCasino = {nombre: "", palo: "", valor: 0};  // Inicializa carta del casino
     }
 
+    // Construye el mazo de cartas con los 4 palos y 13 valores cada uno
     construirMazo(){
-        for(let p:number=0; p < 4; p++){
+        // Itera sobre los 4 palos de la baraja
+        for(let p:number = 0; p < 4; p++){
             let auxPalo:string = "";
+            // Asigna el símbolo del palo según el índice
             if(p === 0){
-                auxPalo = "♦️";
+                auxPalo = "♦️";  // Diamantes
             }else if(p === 1){
-                auxPalo = "♣️";
+                auxPalo = "♣️";  // Tréboles
             }else if(p === 2){
-                auxPalo = "♥️";
+                auxPalo = "♥️";  // Corazones
             }else{
-                auxPalo = "♠️"
+                auxPalo = "♠️";  // Picas
             }
 			
             for(let c:number = 1; c <= 13; c++){
@@ -40,103 +47,121 @@ export class mayorMenor implements IJuego{
                     palo : auxPalo,
                     valor : c
                 }
-                this.mazoDeCartas.push(auxCarta)
+                this.mazoDeCartas.push(auxCarta);
             }
         }
     }
 
     getMontoApostado(){
-        return this.luz
-    }
-    
-    setLuz(pLuz:number){
-        this.luz = pLuz;
+        return this.luz;
     }
 
-    jugar(){
-        this.cartaUsuario = this.obtenerCartaRandom();
-        this.cartaCasino = this.obtenerCartaRandom();
-        this.mostrarSubMenu();
+    // Inicia una nueva ronda del juego
+    // parametro pLuz - Monto inicial a apostar
+    jugar(pLuz:number){
+        this.cartaUsuario = this.obtenerCartaRandom();  // Reparte carta al usuario
+        this.cartaCasino = this.obtenerCartaRandom();  // Reparte carta al casino
+        this.luz += pLuz;  // Actualiza el monto apostado
+        this.mostrarSubMenu();  // Muestra el menú de juego
     }
 
-    obtenerCartaRandom():{nombre:string,palo:string,valor:number}{
+    // retorna Una carta aleatoria del mazo
+    obtenerCartaRandom(): {nombre: string, palo: string, valor: number} {
         const claseRandom = new Random(); 
         let cartaElegida = claseRandom.pick(this.mazoDeCartas);
         return cartaElegida;
     }
 
 
+	// Muestra el submenú de opciones durante el juego
+	// Permite al usuario ver su carta, subir la apuesta o salir del juego
 	mostrarSubMenu(){
-        let salir:boolean = false;
+        let salir:boolean = false;  // Controla el bucle del submenú
 
+		// Muestra la interfaz del submenú
 		console.clear();
-		this.mostrarCartasConsola()
+		this.mostrarCartasConsola()  // Muestra la cartas actual del usuario unicamente
 		console.log("---------------------------------------------------------");
+		// Muestra el saldo actual y el monto apostado
 		console.log(`[  💰 Saldo actual: $${this.casino.obtenerSaldo()} >>> Monto Apostado: $${this.getMontoApostado()} <<<  ]\n`);
+		
+		// Opciones del menú
 		console.log("1. Ver Carta sin subir apuesta");
 		console.log("2. Subir apuesta");
 		console.log("0. Salir");
 		console.log("");
 
+		// Solicita la opción al usuario
 		let opcion:number = rs.questionInt("Seleccione una opcion: ");
 		
+		// Procesa la opción seleccionada
 		switch(opcion){
-			
-			case 1 :
-				this.setApuesta(this.luz);
-                break
-			case 2 :
-                let validar =false;
+			// Opción 1: Ver carta sin aumentar la apuesta
+			case 1:
+				this.setApuesta(this.luz);  // Mantiene la apuesta actual
+                break;
+                
+			// Opción 2: Aumentar la apuesta
+			case 2:
+                let validar = false;  // Controla la validación de la apuesta
                 while(!validar){
+                    // Solicita el monto a apostar
                     let apuesta:number = rs.questionInt("Ingrese la cantidad a apostar: ");
                 
+                    // Verifica si el monto es válido y hay saldo suficiente
                     if(this.casino.descontarApuesta(apuesta) && apuesta >= 0){
-                        apuesta += this.luz;
-                        this.setApuesta(apuesta);
-                        this.mostrarCartasConsola();
-                        validar = true;
+                        apuesta += this.luz;             // Suma la nueva apuesta a la actual
+                        this.setApuesta(apuesta);        // Actualiza el nuevo monto de la apuesta
+                        this.mostrarCartasConsola();     // Muestra las cartas actualizadas
+                        validar = true;                  // Sale del bucle de validación
                     }else{
-                        console.log("\nEl monto ingresado es incorrecto.");
-                        
+                        console.log("\nEl monto ingresado es incorrecto o no tiene saldo suficiente.");
                     }
                 }
-				break
-			case 0 :
-				console.log("Gracias por visitar el juego de Menor o Mayor, que disfrute su estadia en el Casino La Rula te seca 😄💰🍀");
-				salir = true;
-				break
+				break;
+				
+			// Opción 0: Salir del juego
+			case 0:
+				console.log("Gracias por visitar el juego de Menor o Mayor, que disfrute su estadia en el Casino La Rula te seca 😄💰🍀.");
+				salir = true;  // Activa la bandera para salir del menú
+				break;
+				
+			// Opción por defecto: Entrada no válida
 			default:
-				console.log(" Usted ha ingresado un numero incorrecto 😕 ")
-				rs.question("Presione Enter para volver al menu 🆗")
-				break
+				console.log(" Usted ha ingresado un numero incorrecto 😕 ");
+				rs.question("Presione Enter para volver al menu 🆗");
+				break;
 		}
 	}
 
-    setApuesta(pApuesta: number): void{
+    // Evalúa el resultado de la apuesta y paga el premio correspondiente
+    // parametro pApuesta - Monto total apostado en la ronda
+    setApuesta(pApuesta: number): void {
+        this.verCartaCasino = true;       // Muestra la carta del casino
+        this.mostrarCartasConsola();      // Actualiza la visualización
 
-        this.verCartaCasino = true;
-        this.mostrarCartasConsola();
-
-        if(this.cartaUsuario.valor > this.cartaCasino.valor){
+        if(this.cartaUsuario.valor > this.cartaCasino.valor) {
+            // El usuario gana: paga el doble de lo apostado
             console.log(`Ganaste!!!! Total Ganado: $${pApuesta}`);
             this.pagarPremio(pApuesta * 2);
-            console.log();
-            rs.question("presione ENTER para continuar"); 
-        }else if(this.cartaUsuario.valor === this.cartaCasino.valor){
+        } else if(this.cartaUsuario.valor === this.cartaCasino.valor) {
+            // Empate: devuelve la apuesta
             console.log(`Saliste hecho..... apuesta recuperada: $${pApuesta}`);
             this.pagarPremio(pApuesta);
-            console.log();
-            rs.question("presione ENTER para continuar"); 
-        }else{
+        } else {
+            // El usuario pierde: no paga premio
             console.log(`😢 Sin suerte.... has perdido $${pApuesta}`);
             this.pagarPremio(0);
-            console.log();
-            rs.question("presione ENTER para continuar"); 
         }
+        console.log();
+        rs.question("presione ENTER para continuar");
             
 
     };
 
+	// Muestra las cartas en la consola con formato
+	// Si verCartaCasino es false, solo muestra la carta del usuario
+	// Si es true, muestra ambas cartas (usuario y casino)
 	mostrarCartasConsola(){
 		console.clear();
         
@@ -171,12 +196,14 @@ export class mayorMenor implements IJuego{
 +------------------------------------------------+
 		`);
 		}
-	};
+	}
     
-    pagarPremio(pPremio: number): void{
-        this.casino.cargarCreditos(pPremio)
-        this.verCartaCasino = false;
-        this.luz = 0;
+    // Acredita el premio al jugador y reinicia el estado de la ronda
+    // parametro pPremio - Monto a acreditar al jugador
+    pagarPremio(pPremio: number): void {
+        this.casino.cargarCreditos(pPremio);  // Acredita el premio
+        this.verCartaCasino = false;  // Oculta la carta del casino
+        this.luz = 0;  // Reinicia la apuesta
     };
 
 }

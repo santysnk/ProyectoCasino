@@ -1,4 +1,4 @@
-import { Casino } from "../../Clases/Casino";
+import { Casino } from "../../ClasePrincipal/Casino";
 import * as rs from "readline-sync";//instale biblioteca readline-sync para ingresar las apuestas del usuario y los montos respectivamente
 import { IJuego } from "../InterfaceJuego";
 import { Random } from "random-js";//instale biblioteca random-js para recibir  elemento aleatorio que me dara el numero ganador cuando gire la ruleta

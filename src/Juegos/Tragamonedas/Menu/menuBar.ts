@@ -1,5 +1,5 @@
 import * as rs from 'readline-sync';
-import { Casino } from '../../../Clases/Casino';
+import { Casino } from '../../../ClasePrincipal/Casino';
 
 
 export function mostrarMenuBar(pCasino:Casino) {

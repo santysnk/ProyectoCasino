@@ -1,8 +1,8 @@
 import * as rs from 'readline-sync';
-import { Casino } from './Clases/Casino';
+import { Casino } from './ClasePrincipal/Casino';
 import { mostrarMenuTragamonedas } from './Juegos/Tragamonedas/Menu/menuTragamonedas';
 import { mostrarMenuRuleta } from './Juegos/Ruleta/menuRuleta';
-import { mostrarMenuMayorMenor } from './Juegos/mayorMenor/menuMayorMenos';
+import { mostrarMenuMayorMenor } from './Juegos/mayorMenor/menuMayorMenor';
 
 const casino = Casino.getInstance(); 
 

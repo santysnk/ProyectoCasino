@@ -1,4 +1,4 @@
-import { Casino } from "../../Clases/Casino";
+import { Casino } from "../../ClasePrincipal/Casino";
 import * as rs from "readline-sync"
 
 
