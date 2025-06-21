@@ -1,7 +1,7 @@
-import * as rs from "readline-sync";
-import { Random } from "random-js";
-import { Casino } from "../../ClasePrincipal/Casino";
-import { IJuego } from "../InterfaceJuego";
+import * as rs from "readline-sync";                       // Importa la clase readline-sync para leer la entrada del usuario
+import { Random } from "random-js";                        // Importa la clase Random de random-js para generar números aleatorios
+import { Casino } from "../../ClasePrincipal/Casino";      // Importa la clase Casino
+import { IJuego } from "../InterfaceJuego";                // Importa la interface IJuego
 
 // Clase que implementa el juego Mayor o Menor. El jugador apuesta si la próxima carta será mayor o menor que la actual
 export class mayorMenor implements IJuego{
@@ -14,8 +14,8 @@ export class mayorMenor implements IJuego{
 
     // Inicializa el juego con una referencia al casino
     constructor(pCasino:Casino){
-        this.casino = pCasino;
-        this.mazoDeCartas = [];
+        this.casino = pCasino;       // Asigna la instancia del casino recibida como parámetro al atributo de la clase                       
+        this.mazoDeCartas = [];                                  // Inicializa el mazo de cartas como un arreglo vacío   
         this.construirMazo();                                    // Construye el mazo de cartas al iniciar
         this.luz = 0;                                            // Inicializa la apuesta en 0
         this.verCartaCasino = false;                             // Oculta la carta del casino inicialmente
@@ -26,36 +26,43 @@ export class mayorMenor implements IJuego{
     // Construye el mazo de cartas con los 4 palos y 13 valores cada uno
     construirMazo(){
         // Itera sobre los 4 palos de la baraja
-        for(let p:number = 0; p < 4; p++){
+        for(let p:number = 0; p < 4; p++){                       
             let auxPalo:string = "";
+
             // Asigna el símbolo del palo según el índice
             if(p === 0){
-                auxPalo = "♦️";  // Diamantes
+                auxPalo = "♦️";      // Diamantes
             }else if(p === 1){
-                auxPalo = "♣️";  // Tréboles
+                auxPalo = "♣️";      // Tréboles
             }else if(p === 2){
-                auxPalo = "♥️";  // Corazones
+                auxPalo = "♥️";      // Corazones
             }else{
-                auxPalo = "♠️";  // Picas
+                auxPalo = "♠️";      // Picas
             }
 			
+            // Itera sobre los 13 valores de la baraja
             for(let c:number = 1; c <= 13; c++){
-                let auxCarta = {
+
+                // Crea un objeto con la carta actual
+                let auxCarta = {    
+                    // Asigna el nombre de la carta según su valor usando ternarias anidadas
 					nombre: c === 1 ? "A " : c === 10 ? "10" : c === 11 ? "J " : c === 12 ? "Q " : c === 13 ? "K " : c.toString() + " ",
-                    palo : auxPalo,
-                    valor : c
+                    palo : auxPalo,             // Asigna el palo de la carta
+                    valor : c                   // Asigna el valor de la carta
                 }
+
+                // Agrega la carta al mazo
                 this.mazoDeCartas.push(auxCarta);
             }
         }
     }
 
 	setLuz(pLuz:number){
-		this.luz += pLuz; 
+		this.luz = pLuz;       //Asigna el valor de la apuesta minima al atributo luz
 	}
 
     getMontoApostado(){
-        return this.luz;
+        return this.luz;       // Retorna el valor del atributo luz
     }
 
     // Inicia una nueva ronda del juego
@@ -66,9 +73,9 @@ export class mayorMenor implements IJuego{
     }
 
     // retorna Una carta aleatoria del mazo
-    obtenerCartaRandom(): {nombre: string, palo: string, valor: number} {
-        const claseRandom = new Random(); 
-        let cartaElegida = claseRandom.pick(this.mazoDeCartas);
+    obtenerCartaRandom(): {nombre: string, palo: string, valor: number} {     // retorna Una carta aleatoria del mazo
+        const claseRandom = new Random();                                     // crea una instancia de la clase Random
+        let cartaElegida = claseRandom.pick(this.mazoDeCartas);               // selecciona una carta aleatoria del mazo
         return cartaElegida;
     }
 
@@ -99,7 +106,7 @@ export class mayorMenor implements IJuego{
 			switch(opcion){
 				// Opción 1: Ver carta sin aumentar la apuesta
 				case 1:
-					this.setApuesta(this.luz);  // Mantiene la apuesta actual
+					this.setApuesta(this.luz);  // Se llama al metodo setApuesta con el valor de la apuesta minima
 					break;
 					
 				// Opción 2: Aumentar la apuesta
@@ -112,8 +119,8 @@ export class mayorMenor implements IJuego{
 						// Verifica si hay saldo suficiente y que el monto sea válido (no números negativos)
 						if(this.casino.descontarApuesta(apuesta) && apuesta >= 0){
 							apuesta += this.luz;             // Suma la nueva apuesta a la luz
-							this.setApuesta(apuesta);        // Actualiza el nuevo monto de la apuesta
-							this.mostrarCartasConsola();     // Muestra las cartas actualizadas
+							this.setApuesta(apuesta);        // Se llama al metodo setApuesta con el valor de la apuesta minima + la apuesta ingresada
+							this.mostrarCartasConsola();     // Muestra las cartas 
 							validar = true;                  // Sale del bucle de validación
 						}else{
 							console.log("\nEl monto ingresado es incorrecto o no tiene saldo suficiente.");
@@ -139,29 +146,27 @@ export class mayorMenor implements IJuego{
 
     // Evalúa el resultado de la apuesta y paga el premio correspondiente. Parametro pApuesta es el Monto total apostado en la ronda
     setApuesta(pApuesta: number): void {
-        this.verCartaCasino = true;       // Muestra la carta del casino
-        this.mostrarCartasConsola();      // Actualiza la visualización
+        this.verCartaCasino = true;       // habilita mostrar la carta del casino
+        this.mostrarCartasConsola();      // Muestra las cartas
 
-        if(this.cartaUsuario.valor > this.cartaCasino.valor) {
-            // El usuario gana: paga el doble de lo apostado
+        // evalua el resultado de la apuesta y paga el premio correspondiente
+        if(this.cartaUsuario.valor > this.cartaCasino.valor) {                  // si la carta del usuario es mayor que la del casino
+
             console.log(`Ganaste!!!! Total Ganado: $${pApuesta}`);
-            this.pagarPremio(pApuesta * 2);
+            this.pagarPremio(pApuesta * 2);                                     // El usuario gana: paga el doble de lo apostado
 
-        } else if(this.cartaUsuario.valor === this.cartaCasino.valor) {
-            // Empate: devuelve la apuesta
+        } else if(this.cartaUsuario.valor === this.cartaCasino.valor) {         // si la carta del usuario es igual que la del casino
+
             console.log(`Saliste hecho..... apuesta recuperada: $${pApuesta}`);
-            this.pagarPremio(pApuesta);
+            this.pagarPremio(pApuesta);                                         // El usuario empata: recupera la apuesta
 
         } else {
-            // El usuario pierde: no paga premio (valor del premio es 0)
-            console.log(`😢 Sin suerte.... has perdido $${pApuesta}`);
+            console.log(`😢 Sin suerte.... has perdido $${pApuesta}`);          // El usuario pierde: no paga premio (valor del premio es 0)
             this.pagarPremio(0);
         }
 		
         console.log();
         rs.question("presione ENTER para continuar");
-            
-
     };
 
 	// Muestra las cartas en la consola con formato. Si verCartaCasino es false, solo muestra la carta del usuario
