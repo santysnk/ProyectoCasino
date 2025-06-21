@@ -1,18 +1,17 @@
-// Importaciones necesarias para el módulo
-import { Casino } from "../../ClasePrincipal/Casino";
-import * as rs from "readline-sync";
+import { Casino } from "../../ClasePrincipal/Casino";     // Importa la clase Casino
+import * as rs from "readline-sync";                      // Importa la clase readline-sync para leer la entrada del usuario
 
 
 //Muestra el menú principal del juego Mayor o Menor
 //parametro pCasino - Instancia del casino para gestionar saldo y juego
 export function mostrarMenuMayorMenor(pCasino: Casino) {
 	
-    let salir: boolean = false;  // Controla el bucle del menú principal
-    const mayorMenor = pCasino.getMayorMenor();  // Obtiene la instancia del juego
+    let salir: boolean = false;                          // Controla el bucle del menú principal
+    const mayorMenor = pCasino.getMayorMenor();          // Obtiene la instancia del juego
 
     // Bucle principal del menú
     while (!salir) {
-        console.clear();  // Limpia la consola y muestra el encabezado del juego
+        console.clear();                                  // Limpia la consola y muestra el encabezado del juego
         console.log("+-----------------------------------------------------+");
         console.log("|          Bienvenido al juego de Mayor o Menor       |");  
         console.log("+-----------------------------------------------------+");
@@ -36,9 +35,9 @@ export function mostrarMenuMayorMenor(pCasino: Casino) {
         switch (opcion) {
             // Jugar con apuesta inicial (luz) de 10 créditos
             case 1:
-                if (pCasino.descontarApuesta(10)) {
-					mayorMenor.setLuz(10)
-                    mayorMenor.jugar();
+                if (pCasino.descontarApuesta(10)) {       // Si el saldo es suficiente para la apuesta
+					mayorMenor.setLuz(10)                 // Se llama al metodo setLuz con el valor de la apuesta minima
+                    mayorMenor.jugar();                   // Se llama al metodo jugar
                 } else {
                     console.log("Saldo insuficiente para esta apuesta.");
                     rs.question("Presione Enter para continuar...");
@@ -47,9 +46,9 @@ export function mostrarMenuMayorMenor(pCasino: Casino) {
                 
             // Jugar con apuesta inicial (luz) de 50 créditos
             case 2:
-                if (pCasino.descontarApuesta(50)) {
-					mayorMenor.setLuz(50)
-                    mayorMenor.jugar();
+                if (pCasino.descontarApuesta(50)) {       // Si el saldo es suficiente para la apuesta
+					mayorMenor.setLuz(50)                 // Se llama al metodo setLuz con el valor de la apuesta minima
+                    mayorMenor.jugar();                   // Se llama al metodo jugar  
                 } else {
                     console.log("Saldo insuficiente para esta apuesta.");
                     rs.question("Presione Enter para continuar...");
@@ -58,9 +57,9 @@ export function mostrarMenuMayorMenor(pCasino: Casino) {
                 
             // Jugar con apuesta inicial (luz) de 100 créditos
             case 3:
-                if (pCasino.descontarApuesta(100)) {
-					mayorMenor.setLuz(100)
-                    mayorMenor.jugar();
+                if (pCasino.descontarApuesta(100)) {       // Si el saldo es suficiente para la apuesta
+					mayorMenor.setLuz(100)                 // Se llama al metodo setLuz con el valor de la apuesta minima
+                    mayorMenor.jugar();                    // Se llama al metodo jugar  
                 } else {
                     console.log("Saldo insuficiente para esta apuesta.");
                     rs.question("Presione Enter para continuar...");
@@ -70,8 +69,8 @@ export function mostrarMenuMayorMenor(pCasino: Casino) {
             // Salir del juego
             case 0:
                 console.log("Gracias por visitar el juego de Menor o Mayor, que disfrute su estadía en el Casino La Rula te seca 😄💰🍀");
-                pCasino.guardarSaldoEnArchivo();  // Guarda el saldo actual
-                salir = true;  // Sale del bucle del menú
+                pCasino.guardarSaldoEnArchivo();             // Guarda el saldo actual
+                salir = true;                                // Sale del bucle del menú
                 break;
                 
             // Opción no válida
