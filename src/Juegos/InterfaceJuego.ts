@@ -16,6 +16,9 @@ export interface IJuego {
      */
     pagarPremio(pPremio: number): void;
 
+    /**
+     * Realiza la jugada del juego.
+     */
     jugar():void;
 
-}
+};

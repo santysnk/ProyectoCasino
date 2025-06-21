@@ -1,41 +1,48 @@
-import * as rs from 'readline-sync';
-import { Casino } from '../../../ClasePrincipal/Casino';
-import { mostrarMenuFrutas } from './menuFrutas';
-import { mostrarMenuBar } from './menuBar';
+import * as rs from 'readline-sync';                        // Importo readline-sync para leer la entrada del usuario
+import { Casino } from '../../../ClasePrincipal/Casino';    // Importo la clase Casino
+import { mostrarMenuFrutas } from './menuFrutas';           // Importo la funcion mostrarMenuFrutas
+import { mostrarMenuBar } from './menuBar';                 // Importo la funcion mostrarMenuBar
 
-
+// Funcion para mostrar el menu de Tragamonedas
+// parametro pCasino - Instancia del casino para gestionar saldo y juego
 export function mostrarMenuTragamonedas(pCasino:Casino) {
-    let salir:boolean = false;
+    let salir:boolean = false;         // Variable para controlar el bucle
 
+    // Bucle principal para mostrar el menu de Tragamonedas
     while (!salir) {
-        console.clear();
+        console.clear();       // Limpio la consola
         console.log("+--------------------------------------------------------------------------------------+");
         console.log("|      1. [ 🍇 TRAGAMONEDAS DE FRUTAS 🍒 ]       2. [ 🍸 TRAGAMONEDAS DE BAR 🍷 ]      |");              
         console.log("+--------------------------------------------------------------------------------------+\n");
+
+        // Muestro el saldo actual
         console.log(`[ 💰 Saldo actual: $${pCasino.obtenerSaldo()} ]\n`);
         console.log("-----------------------------------");
+
+        // Muestro las opciones
         console.log("1. Jugar Tragamonedas de Frutas");
         console.log("2. Jugar Tragamonedas Bar");
         console.log("0. Salir");
         console.log("-----------------------------------");
 
-        const opcion:number = rs.questionInt("Seleccione una opcion: ");
+        const opcion:number = rs.questionInt("Seleccione una opcion: ");  // Pido la opcion al usuario
 
+        // Proceso la opcion seleccionada
         switch (opcion) {
             case 1:
-                mostrarMenuFrutas(pCasino)
-                break;
+                mostrarMenuFrutas(pCasino)    // Muestro el menu de Tragamonedas de Frutas
+                break;                        // Sale del switch
             case 2:
-                mostrarMenuBar(pCasino)
-                break;
+                mostrarMenuBar(pCasino)       // Muestro el menu de Tragamonedas Bar
+                break;                        // Sale del switch
             case 0:
-                salir = true;
-                break;
+                salir = true;                 // Sale del bucle
+                break;                        // Sale del switch
 
-            default:
+            default:                          // Caso default: Opcion no valida, muestra mensaje de error y vuelve al menu
                 console.log("❌ Opción inválida.");
                 rs.question("Presione ENTER para continuar...");
-                break;
+                break;                        // Sale del switch
         }
     }
 }

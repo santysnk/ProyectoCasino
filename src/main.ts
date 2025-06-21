@@ -1,17 +1,17 @@
-import * as rs from 'readline-sync';
-import { Casino } from './ClasePrincipal/Casino';
-import { mostrarMenuTragamonedas } from './Juegos/Tragamonedas/Menu/menuTragamonedas';
-import { mostrarMenuRuleta } from './Juegos/Ruleta/menuRuleta';
-import { mostrarMenuMayorMenor } from './Juegos/mayorMenor/menuMayorMenor';
+import * as rs from 'readline-sync';                                                     // Importo readline-sync para leer la entrada del usuario
+import { Casino } from './ClasePrincipal/Casino';                                        // Importo la clase Casino
+import { mostrarMenuTragamonedas } from './Juegos/Tragamonedas/Menu/menuTragamonedas';   // Importo la funcion mostrarMenuTragamonedas
+import { mostrarMenuRuleta } from './Juegos/Ruleta/menuRuleta';                          // Importo la funcion mostrarMenuRuleta
+import { mostrarMenuMayorMenor } from './Juegos/mayorMenor/menuMayorMenor';              // Importo la funcion mostrarMenuMayorMenor
 
+// Creo la instancia del casino, que es un singleton
 const casino = Casino.getInstance(); 
 
-/**
- * Función principal que muestra el menú del casino
- * Maneja la navegación entre las diferentes opciones del menú
- */
+// Funcion principal que muestra el menu del casino
+// Maneja la navegacion entre las diferentes opciones del menu
 function mostrarMenuPrincipal() {
-    // Variable de control para el bucle del menú
+
+    // Variable de control para el bucle del menu
     let salir:boolean = false;
 
     // Bucle principal del menú
@@ -50,7 +50,7 @@ function mostrarMenuPrincipal() {
                     console.log(`✅ Se cargaron $${monto} correctamente.`);
                 } else {
                     console.log("❌ Monto inválido.");
-                }
+                };
                 // Pausa para que el usuario pueda ver el mensaje
                 rs.question("\nPresione ENTER para continuar...");
                 break;
@@ -66,7 +66,7 @@ function mostrarMenuPrincipal() {
 
             case 4:
 					// Muestra el menú de Ruleta pasando la instancia del casino
-                    mostrarMenuRuleta(casino)
+                    mostrarMenuRuleta(casino);
                 break;
 
             case 0: // Salir del juego
@@ -79,10 +79,10 @@ function mostrarMenuPrincipal() {
                 console.log("❌ Opción inválida.");
                 rs.question("Presione ENTER para continuar...");
                 break;
-        }
-    }
-}
+        };
+    };
+};
 
-// Punto de entrada principal de la aplicación
-// Inicia mostrando el menú principal
+// Punto de entrada principal de la aplicacion
+// Inicia mostrando el menu principal
 mostrarMenuPrincipal();
