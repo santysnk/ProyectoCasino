@@ -115,7 +115,7 @@ export class Ruleta implements IJuego{
             if (this.ganancia > 0){                              // Si el premio es mayor a 0, se muestra el premio
 
                 console.log(`+-------------------------------------------------------+`);
-                console.log(`|  Felicidades!!! monto apostado $${this.montoApostado}, a ganado: $${this.ganancia}   |`);
+                console.log(`|  Felicidades!!! monto apostado $${this.montoApostado}, a ganado: $${this.ganancia}   `);
                 console.log(`+-------------------------------------------------------+`);
 
                 this.pagarPremio(this.ganancia);                 // Llamo al metodo pagarPremio que me paga el premio
@@ -125,7 +125,7 @@ export class Ruleta implements IJuego{
             }else{            // Si el premio es menor a 0, se mensaje que se perdio
 
                 console.log(`+-------------------------------------------------------+`);
-                console.log(`|  Sin suerte :( has perdido: $ ${this.montoApostado}  |`);
+                console.log(`|  Sin suerte :( has perdido: $ ${this.montoApostado}   `);
                 console.log(`+-------------------------------------------------------+`);
                 rs.question("\nPresione ENTER para continuar...");
 
@@ -181,7 +181,7 @@ export class Ruleta implements IJuego{
                 pagar += auxApuesta.Monto * 2;                                   // multiplico el monto de la apuesta por 2
             };
         };
-        
+
         return pagar;                                                            // Retorno el premio
     };
 

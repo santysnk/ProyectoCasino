@@ -21,7 +21,7 @@ export class mayorMenor implements IJuego{
         this.verCartaCasino = false;                             // Oculta la carta del casino inicialmente
         this.cartaUsuario = {nombre: "", palo: "", valor: 0};    // Inicializa carta del usuario
         this.cartaCasino = {nombre: "", palo: "", valor: 0};     // Inicializa carta del casino
-    }
+    };
 
     // Construye el mazo de cartas con los 4 palos y 13 valores cada uno
     construirMazo():void{
@@ -38,7 +38,7 @@ export class mayorMenor implements IJuego{
                 auxPalo = "♥️";      // Corazones
             }else{
                 auxPalo = "♠️";      // Picas
-            }
+            };
 			
             // Itera sobre los 13 valores de la baraja
             for(let c:number = 1; c <= 13; c++){
@@ -49,38 +49,40 @@ export class mayorMenor implements IJuego{
 					nombre: c === 1 ? "A " : c === 10 ? "10" : c === 11 ? "J " : c === 12 ? "Q " : c === 13 ? "K " : c.toString() + " ",
                     palo : auxPalo,             // Asigna el palo de la carta
                     valor : c                   // Asigna el valor de la carta
-                }
+                };
 
                 // Agrega la carta al mazo
                 this.mazoDeCartas.push(auxCarta);
-            }
-        }
-    }
+            };
+        };
+    };
 
+    //Asigna el valor de la apuesta minima al atributo luz
 	setLuz(pLuz:number):void{
-		this.luz = pLuz;       //Asigna el valor de la apuesta minima al atributo luz
-	}
+		this.luz = pLuz;       
+	};
 
+    // Retorna el valor del atributo luz
     getMontoApostado():number{
-        return this.luz;       // Retorna el valor del atributo luz
-    }
+        return this.luz;       
+    };
 
     // Inicia una nueva ronda del juego
     jugar():void{
         this.cartaUsuario = this.obtenerCartaRandom();     // Reparte carta al usuario
         this.cartaCasino = this.obtenerCartaRandom();      // Reparte carta al casino
         this.mostrarSubMenu();                             // Muestra el subMenú de juego
-    }
+    };
 
     // retorna Una carta aleatoria del mazo
     obtenerCartaRandom(): {nombre: string, palo: string, valor: number} {     // retorna Una carta aleatoria del mazo
         const claseRandom = new Random();                                     // crea una instancia de la clase Random
         let cartaElegida = claseRandom.pick(this.mazoDeCartas);               // selecciona una carta aleatoria del mazo
         return cartaElegida;
-    }
+    };
 
 
-	// Muestra el subMenú de opciones durante el juego. Permite al usuario ver su carta, subir la apuesta o salir del juego 
+    // Muestra el subMenú de opciones durante el juego. Permite al usuario ver su carta, subir la apuesta o salir del juego 
 	mostrarSubMenu():void{
         let salir: boolean = false;             // Controla el bucle del subMenú
 
@@ -88,7 +90,7 @@ export class mayorMenor implements IJuego{
 
 			// Muestra la interfaz del submenú
 			console.clear();
-			this.mostrarCartasConsola()         // Muestra la cartas actual del usuario unicamente
+			this.mostrarCartasConsola();         // Muestra la cartas actual del usuario unicamente
 			console.log("---------------------------------------------------------");
 			// Muestra el saldo actual y el monto apostado
 			console.log(`[  💰 Saldo actual: $${this.casino.obtenerSaldo()} >>> Monto Apostado: $${this.getMontoApostado()} <<<  ]\n`);
@@ -124,8 +126,8 @@ export class mayorMenor implements IJuego{
 							validar = true;                  // Sale del bucle de validación
 						}else{
 							console.log("\nEl monto ingresado es incorrecto o no tiene saldo suficiente.");
-						}
-					}
+						};
+					};
 					break;
 					
 				// Opción 0: Salir del juego
@@ -139,9 +141,9 @@ export class mayorMenor implements IJuego{
 					console.log("\nUsted ha ingresado un numero incorrecto 😕 ");
 					rs.question("Presione Enter para volver al menu");
 					break;
-			}
-		}	
-	}
+			};
+		};	
+	};
 
 
     // Evalúa el resultado de la apuesta y paga el premio correspondiente. Parametro pApuesta es el Monto total apostado en la ronda
@@ -163,11 +165,12 @@ export class mayorMenor implements IJuego{
         } else {
             console.log(`😢 Sin suerte.... has perdido $${pApuesta}`);          // El usuario pierde: no paga premio (valor del premio es 0)
             this.pagarPremio(0);
-        }
+        };
 		
         console.log();
         rs.question("presione ENTER para continuar");
     };
+
 
 	// Muestra las cartas en la consola con formato. Si verCartaCasino es false, solo muestra la carta del usuario
 	// Si es true, muestra ambas cartas (usuario y casino)
@@ -189,6 +192,7 @@ export class mayorMenor implements IJuego{
 |                                                |
 +------------------------------------------------+
 			`);
+
 		}else{
 			console.log(`
 +------------------------------------------------+
@@ -214,4 +218,4 @@ export class mayorMenor implements IJuego{
         this.luz = 0;                            // Reinicia la apuesta
     };
 
-}
+};

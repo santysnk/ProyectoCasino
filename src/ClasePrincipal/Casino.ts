@@ -18,7 +18,7 @@ export class Casino {
 
     // Constructor privado para forzar el uso de getInstance()
     // Inicializa el casino cargando el saldo guardado y creando las instancias de los juegos
-    private constructor() {
+    private constructor(){
         this.saldo = leerSaldo();                               // Carga el saldo desde el archivo de persistencia
         this.juegosTragamonedas = [];                           // Inicialización del array de juegos de tragamonedas
         
@@ -28,60 +28,63 @@ export class Casino {
         this.juegosTragamonedas.push(new TragamonedasBar(this));           // Inicializa Tragamonedas de barras
         this.ruleta = new Ruleta(this);                                    // Inicializa el juego de ruleta
         this.mayorMenor = new mayorMenor(this);                            // Inicializa el juego Mayor o Menor
-    }
+    };
 
     // Devuelve la única instancia del Casino, creándola si es necesario
-    public static getInstance(): Casino {
+    public static getInstance():Casino {
         if (this.instancia === null) {
             this.instancia = new Casino();
-        }
+        };
+
         return this.instancia;
-    }
+    };
 
     // Añade créditos al saldo actual del jugador. Parametro pMonto - La cantidad de créditos a agregar al saldo
-    cargarCreditos(pMonto: number):void {
+    cargarCreditos(pMonto:number):void {
         this.saldo += pMonto;                       // Incrementa el saldo con el monto proporcionado
-    }
+    };
 
     // Devuelve el saldo actual del jugador
     obtenerSaldo():number {                        
         return this.saldo;                          
-    }
+    };
 
     // Guarda el saldo actual en el archivo de persistencia
     guardarSaldoEnArchivo():void {
         guardarSaldo(this.saldo);                   
-    }
+    };
 
     // Intenta descontar una apuesta del saldo actual
     // Devuelve true si se pudo descontar, false si no hay saldo suficiente
-    descontarApuesta(pApuesta: number):boolean {
+    descontarApuesta(pApuesta:number):boolean {
         if (pApuesta > this.saldo) {
             console.log("❌ No tenés saldo suficiente.");
             rs.question("Presione ENTER para volver al menu...");
             return false;
-        }
+        };
+        
         this.saldo -= pApuesta;
         return true;
-    }
+    };
 
     // retorna La instancia de TragamonedasFrutas (primer elemento del array de tragamonedas)
     getTragamonedasFrutas():TragamonedasFrutas {
         return this.juegosTragamonedas[0] as TragamonedasFrutas;
-    }
+    };
 
     // retorna La instancia de TragamonedasBar (segundo elemento del array de tragamonedas)
     getTragamonedasBar():TragamonedasBar {
         return this.juegosTragamonedas[1] as TragamonedasBar;
-    }
+    };
 
     // retorna La instancia del juego Mayor o Menor
     getMayorMenor():mayorMenor {
         return this.mayorMenor;
-    }
+    };
     
     // retorna La instancia del juego de Ruleta
     getRuleta():Ruleta {
         return this.ruleta;         
-    }
+    };
+    
 }

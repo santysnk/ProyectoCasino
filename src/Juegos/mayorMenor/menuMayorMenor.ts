@@ -33,53 +33,57 @@ export function mostrarMenuMayorMenor(pCasino: Casino) {
 
         // Procesa la opción seleccionada por el usuario
         switch (opcion) {
+
             // Jugar con apuesta inicial (luz) de 10 créditos
             case 1:
-                if (pCasino.descontarApuesta(10)) {       // Si el saldo es suficiente para la apuesta
-					mayorMenor.setLuz(10)                 // Se llama al metodo setLuz con el valor de la apuesta minima
-                    mayorMenor.jugar();                   // Se llama al metodo jugar
-                } else {
-                    console.log("Saldo insuficiente para esta apuesta.");
-                    rs.question("Presione Enter para continuar...");
-                }
-                break;
+                if (pCasino.descontarApuesta(10)) {                         // Si el saldo es suficiente para la apuesta
+					mayorMenor.setLuz(10);                                  // Se llama al metodo setLuz con el valor de la apuesta minima
+                    mayorMenor.jugar();                                     // Se llama al metodo jugar
+
+                } else {                                                    // Si el saldo es insuficiente para la apuesta
+                    console.log("Saldo insuficiente para esta apuesta.");   // Muestra mensaje de error
+                    rs.question("Presione Enter para continuar...");        // Solicita al usuario que presione Enter para continuar
+                };
+                break;                                                      // Sale del switch
                 
             // Jugar con apuesta inicial (luz) de 50 créditos
             case 2:
-                if (pCasino.descontarApuesta(50)) {       // Si el saldo es suficiente para la apuesta
-					mayorMenor.setLuz(50)                 // Se llama al metodo setLuz con el valor de la apuesta minima
-                    mayorMenor.jugar();                   // Se llama al metodo jugar  
-                } else {
-                    console.log("Saldo insuficiente para esta apuesta.");
-                    rs.question("Presione Enter para continuar...");
-                }
-                break;
+                if (pCasino.descontarApuesta(50)) {                         // Si el saldo es suficiente para la apuesta
+					mayorMenor.setLuz(50);                                  // Se llama al metodo setLuz con el valor de la apuesta minima
+                    mayorMenor.jugar();                                     // Se llama al metodo jugar  
+
+                } else {                                                    // Si el saldo es insuficiente para la apuesta
+                    console.log("Saldo insuficiente para esta apuesta.");   // Muestra mensaje de error
+                    rs.question("Presione Enter para continuar...");        // Solicita al usuario que presione Enter para continuar
+                };
+                break;                                                      // Sale del switch
                 
             // Jugar con apuesta inicial (luz) de 100 créditos
             case 3:
-                if (pCasino.descontarApuesta(100)) {       // Si el saldo es suficiente para la apuesta
-					mayorMenor.setLuz(100)                 // Se llama al metodo setLuz con el valor de la apuesta minima
-                    mayorMenor.jugar();                    // Se llama al metodo jugar  
-                } else {
-                    console.log("Saldo insuficiente para esta apuesta.");
-                    rs.question("Presione Enter para continuar...");
-                }
-                break;
+                if (pCasino.descontarApuesta(100)) {                        // Si el saldo es suficiente para la apuesta
+					mayorMenor.setLuz(100);                                 // Se llama al metodo setLuz con el valor de la apuesta minima
+                    mayorMenor.jugar();                                     // Se llama al metodo jugar  
+
+                } else {                                                    // Si el saldo es insuficiente para la apuesta
+                    console.log("Saldo insuficiente para esta apuesta.");   // Muestra mensaje de error
+                    rs.question("Presione Enter para continuar...");        // Solicita al usuario que presione Enter para continuar
+                };
+                break;                                                      // Sale del switch
                 
             // Salir del juego
             case 0:
                 console.log("Gracias por visitar el juego de Menor o Mayor, que disfrute su estadía en el Casino La Rula te seca 😄💰🍀");
-                pCasino.guardarSaldoEnArchivo();             // Guarda el saldo actual
-                salir = true;                                // Sale del bucle del menú
-                break;
+                pCasino.guardarSaldoEnArchivo();                            // Guarda el saldo actual
+                salir = true;                                               // Sale del bucle del menú
+                break;                                                      // Sale del switch
                 
             // Opción no válida
-            default:
-                console.log("Usted ha ingresado un número incorrecto 😕");
-                rs.question("Presione Enter para volver al menu");
-                break;
-        }
-    }
-}
+            default:                                                        // Opción por defecto: Entrada no válida
+                console.log("Usted ha ingresado un número incorrecto 😕");  // Muestra mensaje de error
+                rs.question("Presione Enter para volver al menu");          // Solicita al usuario que presione Enter para continuar
+                break;                                                      // Sale del switch
+        };
+    };
+};
 
 
