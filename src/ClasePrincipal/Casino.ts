@@ -39,23 +39,23 @@ export class Casino {
     }
 
     // Añade créditos al saldo actual del jugador. Parametro pMonto - La cantidad de créditos a agregar al saldo
-    cargarCreditos(pMonto: number): void {
+    cargarCreditos(pMonto: number):void {
         this.saldo += pMonto;                       // Incrementa el saldo con el monto proporcionado
     }
 
     // Devuelve el saldo actual del jugador
-    obtenerSaldo(): number {                        
+    obtenerSaldo():number {                        
         return this.saldo;                          
     }
 
     // Guarda el saldo actual en el archivo de persistencia
-    guardarSaldoEnArchivo(): void {
+    guardarSaldoEnArchivo():void {
         guardarSaldo(this.saldo);                   
     }
 
     // Intenta descontar una apuesta del saldo actual
     // Devuelve true si se pudo descontar, false si no hay saldo suficiente
-    descontarApuesta(pApuesta: number): boolean {
+    descontarApuesta(pApuesta: number):boolean {
         if (pApuesta > this.saldo) {
             console.log("❌ No tenés saldo suficiente.");
             rs.question("Presione ENTER para volver al menu...");
@@ -66,22 +66,22 @@ export class Casino {
     }
 
     // retorna La instancia de TragamonedasFrutas (primer elemento del array de tragamonedas)
-    getTragamonedasFrutas(): TragamonedasFrutas {
+    getTragamonedasFrutas():TragamonedasFrutas {
         return this.juegosTragamonedas[0] as TragamonedasFrutas;
     }
 
     // retorna La instancia de TragamonedasBar (segundo elemento del array de tragamonedas)
-    getTragamonedasBar(): TragamonedasBar {
+    getTragamonedasBar():TragamonedasBar {
         return this.juegosTragamonedas[1] as TragamonedasBar;
     }
 
     // retorna La instancia del juego Mayor o Menor
-    getMayorMenor(): mayorMenor {
+    getMayorMenor():mayorMenor {
         return this.mayorMenor;
     }
     
     // retorna La instancia del juego de Ruleta
-    getRuleta(): Ruleta {
+    getRuleta():Ruleta {
         return this.ruleta;         
     }
 }

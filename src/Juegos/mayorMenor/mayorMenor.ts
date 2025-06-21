@@ -24,7 +24,7 @@ export class mayorMenor implements IJuego{
     }
 
     // Construye el mazo de cartas con los 4 palos y 13 valores cada uno
-    construirMazo(){
+    construirMazo():void{
         // Itera sobre los 4 palos de la baraja
         for(let p:number = 0; p < 4; p++){                       
             let auxPalo:string = "";
@@ -57,16 +57,16 @@ export class mayorMenor implements IJuego{
         }
     }
 
-	setLuz(pLuz:number){
+	setLuz(pLuz:number):void{
 		this.luz = pLuz;       //Asigna el valor de la apuesta minima al atributo luz
 	}
 
-    getMontoApostado(){
+    getMontoApostado():number{
         return this.luz;       // Retorna el valor del atributo luz
     }
 
     // Inicia una nueva ronda del juego
-    jugar(){
+    jugar():void{
         this.cartaUsuario = this.obtenerCartaRandom();     // Reparte carta al usuario
         this.cartaCasino = this.obtenerCartaRandom();      // Reparte carta al casino
         this.mostrarSubMenu();                             // Muestra el subMenú de juego
@@ -81,14 +81,14 @@ export class mayorMenor implements IJuego{
 
 
 	// Muestra el subMenú de opciones durante el juego. Permite al usuario ver su carta, subir la apuesta o salir del juego 
-	mostrarSubMenu(){
-        let salir: boolean = false;  // Controla el bucle del subMenú
+	mostrarSubMenu():void{
+        let salir: boolean = false;             // Controla el bucle del subMenú
 
 		while (!salir) {
 
 			// Muestra la interfaz del submenú
 			console.clear();
-			this.mostrarCartasConsola()  // Muestra la cartas actual del usuario unicamente
+			this.mostrarCartasConsola()         // Muestra la cartas actual del usuario unicamente
 			console.log("---------------------------------------------------------");
 			// Muestra el saldo actual y el monto apostado
 			console.log(`[  💰 Saldo actual: $${this.casino.obtenerSaldo()} >>> Monto Apostado: $${this.getMontoApostado()} <<<  ]\n`);
@@ -106,12 +106,12 @@ export class mayorMenor implements IJuego{
 			switch(opcion){
 				// Opción 1: Ver carta sin aumentar la apuesta
 				case 1:
-					this.setApuesta(this.luz);  // Se llama al metodo setApuesta con el valor de la apuesta minima
+					this.setApuesta(this.luz);               // Se llama al metodo setApuesta con el valor de la apuesta minima
 					break;
 					
 				// Opción 2: Aumentar la apuesta
 				case 2:
-					let validar = false;         // Controla la validación de la apuesta
+					let validar = false;                     // Controla la validación de la apuesta
 					while(!validar){
 						// Solicita el monto a apostar
 						let apuesta:number = rs.questionInt("Ingrese la cantidad a apostar: ");
@@ -131,7 +131,7 @@ export class mayorMenor implements IJuego{
 				// Opción 0: Salir del juego
 				case 0:
 					console.log("Gracias por visitar el juego de Menor o Mayor, que disfrute su estadia en el Casino La Rula te seca 😄💰🍀.");
-					salir = true;  // Sale del bucle del subMenú
+					salir = true;                            // Sale del bucle del subMenú
 					break;
 					
 				// Opción por defecto: Entrada no válida
@@ -145,9 +145,9 @@ export class mayorMenor implements IJuego{
 
 
     // Evalúa el resultado de la apuesta y paga el premio correspondiente. Parametro pApuesta es el Monto total apostado en la ronda
-    setApuesta(pApuesta: number): void {
-        this.verCartaCasino = true;       // habilita mostrar la carta del casino
-        this.mostrarCartasConsola();      // Muestra las cartas
+    setApuesta(pApuesta: number):void {
+        this.verCartaCasino = true;                         // habilita mostrar la carta del casino
+        this.mostrarCartasConsola();                        // Muestra las cartas
 
         // evalua el resultado de la apuesta y paga el premio correspondiente
         if(this.cartaUsuario.valor > this.cartaCasino.valor) {                  // si la carta del usuario es mayor que la del casino
@@ -171,7 +171,7 @@ export class mayorMenor implements IJuego{
 
 	// Muestra las cartas en la consola con formato. Si verCartaCasino es false, solo muestra la carta del usuario
 	// Si es true, muestra ambas cartas (usuario y casino)
-	mostrarCartasConsola(){
+	mostrarCartasConsola():void{
 		console.clear();
         
 		if(!this.verCartaCasino){
@@ -208,7 +208,7 @@ export class mayorMenor implements IJuego{
 	};
     
     // Acredita el premio al jugador y reinicia el estado de la ronda
-    pagarPremio(pPremio: number): void {
+    pagarPremio(pPremio: number):void {
         this.casino.cargarCreditos(pPremio);     // Acredita el premio
         this.verCartaCasino = false;             // Oculta la carta del casino
         this.luz = 0;                            // Reinicia la apuesta
