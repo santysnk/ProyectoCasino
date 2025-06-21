@@ -109,11 +109,13 @@ export class mayorMenor implements IJuego{
 				// Opción 1: Ver carta sin aumentar la apuesta
 				case 1:
 					this.setApuesta(this.luz);               // Se llama al metodo setApuesta con el valor de la apuesta minima
-					break;
+					salir = true;                            // Sale del bucle del subMenú
+                    break;
 					
 				// Opción 2: Aumentar la apuesta
 				case 2:
 					let validar = false;                     // Controla la validación de la apuesta
+                    
 					while(!validar){
 						// Solicita el monto a apostar
 						let apuesta:number = rs.questionInt("Ingrese la cantidad a apostar: ");
@@ -128,6 +130,8 @@ export class mayorMenor implements IJuego{
 							console.log("\nEl monto ingresado es incorrecto o no tiene saldo suficiente.");
 						};
 					};
+
+                    salir = true;                            // Sale del bucle del subMenú
 					break;
 					
 				// Opción 0: Salir del juego
