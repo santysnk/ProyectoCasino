@@ -1,4 +1,3 @@
-
 import { Casino } from "../../ClasePrincipal/Casino";           // Importa la clase Casino
 import * as rs from "readline-sync";                            // Importa la clase readline-sync para leer la entrada del usuario
 
