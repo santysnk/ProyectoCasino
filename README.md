@@ -144,32 +144,42 @@ Verás el menú principal en consola. Navega ingresando el número de opción y 
 > - Durante el desarrollo puedes seguir usando `npm start` con **ts-node**.  
 > - Si prefieres trabajar con los archivos `.js` resultantes (por ejemplo, para revisarlos o compartirlos), ejecuta `npm run build` y encontrarás el JavaScript generado en la carpeta `dist/`.  
 
-
 ---
 
 ## 📋 Recursos del proyecto
 
-- **Project Board (GitHub Projects)**  
-  https://github.com/users/santysnk/projects/1  
-  > Acceso limitado a:  
-  > - Casal Santiago  
-  > - Vanina Labrunee  
-  > - Braian Aued  
-  > - docentefip
+### 🔐 Acceso al repositorio (privado)  
+Solo estos colaboradores tienen acceso directo al código:  
+- **Braian Aued** (`auedBraian`)   
+- **Santiago Casal** (`santysnk`)  
+- **docentefip** (`docentefip`)  
+- **Vanina Labrunee** (`VaninaL`)  
+
+### 📊 Acceso al Project Board (GitHub Projects)  
+https://github.com/users/santysnk/projects/1  
+> El board es independiente del repositorio. Estos mismos cuatro usuarios pueden verlo y gestionarlo:  
+> - **Braian Aued** (`auedBraian`)  
+> - **Santiago Casal** (`santysnk`)  
+> - **docentefip** (`docentefip`)  
+> - **Vanina Labrunee** (`VaninaL`)  
+
+### 📂 Otros recursos con acceso restringido
 
 - **Diagrama de clases (Google Drive)**  
   https://drive.google.com/file/d/1vGcDIswa6QSm65mlJU17ybUjWCR7KoLF/view?usp=sharing  
-  > Acceso concedido únicamente a:  
+  > Solo para:  
   > - docentefip@gmail.com  
   > - talento.cepit@normaltandil.edu.ar  
-  > - Miembros del grupo de desarrollo
+  > - **Vanina Labrunee** (`VaninaL`)
+  > - **Santiago Casal** (`santysnk`)  
 
 - **Hoja de pruebas de funcionalidad (Google Sheets)**  
   https://docs.google.com/spreadsheets/d/16XljvDeYndlTsZMwNvMAoXfqKyhaBW1bmgQAvCX-hB0/edit?usp=sharing  
-  > Acceso concedido únicamente a:  
+  > Solo para:  
   > - docentefip@gmail.com  
   > - talento.cepit@normaltandil.edu.ar  
-  > - Miembros del grupo de desarrollo
+  > - **Vanina Labrunee** (`VaninaL`)
+  > - **Santiago Casal** (`santysnk`)  
 
 ---
 
