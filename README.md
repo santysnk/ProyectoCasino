@@ -103,13 +103,13 @@ Breve explicación de qué hace la aplicación, para qué sirve y el contexto ed
 
 2. Instala dependencias:
 
-   ```bash
+   ```markdown
    npm install
    ```
 3. Asegúrate de tener creado el archivo de saldo (opcional, se creará al guardar por primera vez):
 
-   ```bash
-   echo "0" > saldo.txt
+   ```markdown
+   > saldo.txt
    ```
 
 ---
@@ -128,12 +128,15 @@ Verás el menú principal en consola. Navega ingresando el número de opción y 
 
 ## 🧩 Scripts disponibles
 
-| Comando         | Descripción                                        |
-| --------------- | -------------------------------------------------- |
-| `npm start`     | Ejecuta `ts-node src/main.ts`                      |
-| `npm run build` | Compila TypeScript a JavaScript (si lo configuras) |
+| Comando         | Descripción                                                    |
+| --------------- | -------------------------------------------------------------- |
+| `npm start`     | Ejecuta el proyecto directamente con `ts-node src/main.ts`.    |
+| `npm run build` | Compila todo el TypeScript de `src/` a JavaScript en `dist/` usando `tsc`. |
 
-> **Nota**: en un entorno educativo puede que no tengas aún configurado un `build` completo.
+> **Nota**:  
+> - Durante el desarrollo puedes seguir usando `npm start` con **ts-node**.  
+> - Si prefieres trabajar con los archivos `.js` resultantes (por ejemplo, para revisarlos o compartirlos), ejecuta `npm run build` y encontrarás el JavaScript generado en la carpeta `dist/`.  
+
 
 ---
 
