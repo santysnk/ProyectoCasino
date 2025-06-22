@@ -54,7 +54,7 @@ Breve explicación de qué hace la aplicación, para qué sirve y el contexto ed
 
 ## 📁 Estructura del proyecto
 
-
+```
 
 📦src
 ┣ 📂ClasePrincipal
@@ -83,7 +83,7 @@ Breve explicación de qué hace la aplicación, para qué sirve y el contexto ed
 📜package.json
 📜tsconfig.json
 
-
+```
 
 - **`src/`**: código fuente en TypeScript.  
 - **`ClasePrincipal/Casino.ts`**: clase Singleton que almacena y gestiona el saldo.  
