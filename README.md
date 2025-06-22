@@ -1,6 +1,3 @@
-Aquí tienes una plantilla de **README.md** en español, pensada para un proyecto educativo de curso inicial de programación web full-stack. Puedes copiarla, ajustarla y completar los apartados con la información concreta de tu proyecto:
-
-```markdown
 # 🎰 Proyecto Casino “La Rula te Seca”
 
 > Aplicación de consola en TypeScript que simula un Casino con tres juegos: Tragamonedas, Ruleta y Mayor o Menor.  
@@ -99,10 +96,10 @@ Breve explicación de qué hace la aplicación, para qué sirve y el contexto ed
 ## 🚀 Instalación
 
 1. Clona el repositorio:
-   ```bash
+   ```markdown
    git clone https://github.com/tu-usuario/proyecto-casino.git
-   cd proyecto-casino
-````
+
+   ```
 
 2. Instala dependencias:
 
