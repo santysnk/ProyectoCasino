@@ -5,17 +5,24 @@
 
 ---
 
+## 👥 Equipo de desarrollo
+
+- **Santiago Casal** (@santysnk)  
+- **Vanina Labrunee** (@VaninaL)
+
+---
+
 ## 📋 Índice
 
 1. [Descripción](#-descripción)  
-2. [Características](#-características)  
-3. [Tecnologías](#-tecnologías)  
-4. [Estructura del proyecto](#-estructura-del-proyecto)  
-5. [Instalación](#-instalación)  
-6. [Uso](#-uso)  
-7. [Scripts disponibles](#-scripts-disponibles)  
-8. [Cómo contribuir](#-cómo-contribuir)  
-9. [Licencia](#-licencia)  
+2. [Equipo de desarrollo](#-equipo-de-desarrollo)  
+3. [Características](#-características)  
+4. [Tecnologías](#-tecnologías)  
+5. [Estructura del proyecto](#-estructura-del-proyecto)  
+6. [Instalación](#-instalación)  
+7. [Uso](#-uso)  
+8. [Scripts disponibles](#-scripts-disponibles)  
+9. [Recursos del proyecto](#-recursos-del-proyecto)   
 
 ---
 
@@ -140,39 +147,32 @@ Verás el menú principal en consola. Navega ingresando el número de opción y 
 
 ---
 
-## 🤝 Cómo contribuir
+## 📋 Recursos del proyecto
 
-1. Haz un **fork** del repositorio.
-2. Crea una **rama** (`git checkout -b feature/nombre-feature`).
-3. **Commit** tus cambios (`git commit -m 'Agrega nueva funcionalidad'`).
-4. **Push** a la rama (`git push origin feature/nombre-feature`).
-5. Abre un **Pull Request**.
+- **Project Board (GitHub Projects)**  
+  https://github.com/users/santysnk/projects/1  
+  > Acceso limitado a:  
+  > - Casal Santiago  
+  > - Vanina Labrunee  
+  > - Braian Aued  
+  > - docentefip
+
+- **Diagrama de clases (Google Drive)**  
+  https://drive.google.com/file/d/1vGcDIswa6QSm65mlJU17ybUjWCR7KoLF/view?usp=sharing  
+  > Acceso concedido únicamente a:  
+  > - docentefip@gmail.com  
+  > - talento.cepit@normaltandil.edu.ar  
+  > - Miembros del grupo de desarrollo
+
+- **Hoja de pruebas de funcionalidad (Google Sheets)**  
+  https://docs.google.com/spreadsheets/d/16XljvDeYndlTsZMwNvMAoXfqKyhaBW1bmgQAvCX-hB0/edit?usp=sharing  
+  > Acceso concedido únicamente a:  
+  > - docentefip@gmail.com  
+  > - talento.cepit@normaltandil.edu.ar  
+  > - Miembros del grupo de desarrollo
 
 ---
 
-## 📄 Licencia
+> ⚠️ **Este repositorio es privado** y solo los usuarios mencionados tienen permiso de acceso.
 
-Este proyecto está bajo la licencia **MIT**. Consulta el archivo [LICENSE](LICENSE) para más detalles.
-
----
-
-> 📝 **Tip:**
->
-> * Mantén actualizado el README conforme avances en el curso.
-> * Añade capturas de pantalla si luego planeas migrar a una interfaz gráfica.
-> * Si el proyecto crece, separa la sección de [Documentación detallada](#) en un Wiki o carpeta `docs/`.
-
-```
-
----
-
-### ¿Cómo usar esta plantilla?
-
-1. **Copia** el contenido a un archivo `README.md` en la raíz de tu proyecto.  
-2. **Reemplaza** los fragmentos entre comillas o los ejemplos (`tu-usuario`, rutas, descripciones).  
-3. **Añade** o quita secciones según tus necesidades (por ejemplo, si no usas tests, elimina esa parte).  
-4. A medida que aprendas nuevas prácticas, puedes **completar** apartados como “Tests”, “Despliegue” o “CI/CD”.  
-
-¡Listo! Con esto tendrás un README claro, completo y adaptado a un proyecto de curso inicial.
-```
 
