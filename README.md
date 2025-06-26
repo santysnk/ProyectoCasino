@@ -148,7 +148,7 @@ Verás el menú principal en consola. Navega ingresando el número de opción y 
 
 ## 📋 Recursos del proyecto
 
-### 🔐 Acceso al repositorio (privado)  
+### 🔐 Acceso al repositorio (público)  
 Solo estos colaboradores tienen acceso directo al código:  
 - **Braian Aued** (`auedBraian`)   
 - **Santiago Casal** (`santysnk`)  
