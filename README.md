@@ -105,7 +105,6 @@ Breve explicación de qué hace la aplicación, para qué sirve y el contexto ed
 1. Clona el repositorio:
    ```
    git clone https://github.com/tu-usuario/proyecto-casino.git
-
    ```
 
 2. Instala dependencias:
@@ -175,10 +174,19 @@ https://github.com/users/santysnk/projects/1
   > - docentefip@gmail.com  
   > - talento.cepit@normaltandil.edu.ar  
   > - **Vanina Labrunee** (`VaninaL`)
-  > - **Santiago Casal** (`santysnk`)  
+  > - **Santiago Casal** (`santysnk`)
+
+- **Documentación Proyecto de programa Casino (Google Sheets)**  
+  https://docs.google.com/document/d/1CEpoDkQXUuhO8Q9LQ48e8CkFYeeOL-I0AvUh0YzwKUQ/edit?usp=drive_link 
+  > Solo para:  
+  > - docentefip@gmail.com  
+  > - talento.cepit@normaltandil.edu.ar  
+  > - **Vanina Labrunee** (`VaninaL`)
+  > - **Santiago Casal** (`santysnk`) 
+  
 
 ---
 
-> ⚠️ **Este repositorio es privado** y solo los usuarios mencionados tienen permiso de acceso.
+
 
 
