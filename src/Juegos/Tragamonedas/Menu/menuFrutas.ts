@@ -71,7 +71,7 @@ export function mostrarMenuFrutas(pCasino:Casino) {
                 break;                                      // Sale del switch
 
             default:
-                console.log("❌ Opción inválida.");       // Muestro mensaje de error
+                console.log("❌ Opcion invalida.");       // Muestro mensaje de error
                 rs.question("Presione ENTER para continuar...");  // Pido que presione Enter para continuar
                 break;                                     // Sale del switch
         };

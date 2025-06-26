@@ -53,6 +53,7 @@ export function mostrarMenuRuleta (pCasino:Casino){
             case 0 :                                            // Caso 0: Salir, manda a guardar el saldo en el archivo y sale del bucle
                 console.log("Gracias por visitar la ruleta, que disfrute su estadia en el Casino La Rula te seca 😄💰🍀");
                 pCasino.guardarSaldoEnArchivo();
+                rs.question("Presione Enter para volver al menu ");
                 salir = true;
                 break;
 

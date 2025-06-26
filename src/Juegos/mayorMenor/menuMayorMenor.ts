@@ -21,7 +21,7 @@ export function mostrarMenuMayorMenor(pCasino: Casino) {
         
         // Muestra las opciones del menú
         console.log("----------------------------------------");
-        console.log(" Elija una opción: \n");
+        console.log(" Elija una opcion: \n");
         console.log("1. Jugar con apuesta de 10 créditos");         
         console.log("2. Jugar con apuesta de 50 créditos");
         console.log("3. Jugar con apuesta de 100 créditos");
@@ -74,12 +74,13 @@ export function mostrarMenuMayorMenor(pCasino: Casino) {
             case 0:
                 console.log("Gracias por visitar el juego de Menor o Mayor, que disfrute su estadía en el Casino La Rula te seca 😄💰🍀");
                 pCasino.guardarSaldoEnArchivo();                            // Guarda el saldo actual
+                rs.question("Presione Enter para volver al menu ");
                 salir = true;                                               // Sale del bucle del menú
                 break;                                                      // Sale del switch
                 
             // Opción no válida
             default:                                                        // Opción por defecto: Entrada no válida
-                console.log("Usted ha ingresado un número incorrecto 😕");  // Muestra mensaje de error
+                console.log("Usted ha ingresado un numero incorrecto 😕");  // Muestra mensaje de error
                 rs.question("Presione Enter para volver al menu");          // Solicita al usuario que presione Enter para continuar
                 break;                                                      // Sale del switch
         };

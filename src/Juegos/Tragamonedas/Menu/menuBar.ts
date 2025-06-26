@@ -75,7 +75,7 @@ export function mostrarMenuBar(pCasino:Casino) {
                 break;                                         // Sale del switch
 
             default:                                           // Caso default: Opcion no valida, muestra mensaje de error y vuelve al menu
-                console.log("❌ Opción inválida.");
+                console.log("❌ Opcion invalida.");
                 rs.question("Presione ENTER para continuar...");
                 break;
         };

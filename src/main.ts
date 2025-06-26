@@ -29,7 +29,7 @@ function mostrarMenuPrincipal() {
         
         // Muestra las opciones del menú
         console.log("-------------------------------------------------");
-        console.log("1. Cargar créditos");
+        console.log("1. Cargar creditos");
         console.log("2. Jugar Tragamonedas");
         console.log("3. Jugar Mayor o Menor");
         console.log("4. Jugar Ruleta");
@@ -49,7 +49,7 @@ function mostrarMenuPrincipal() {
                     casino.cargarCreditos(monto);
                     console.log(`✅ Se cargaron $${monto} correctamente.`);
                 } else {
-                    console.log("❌ Monto inválido.");
+                    console.log("❌ Monto invalido.");
                 };
                 // Pausa para que el usuario pueda ver el mensaje
                 rs.question("\nPresione ENTER para continuar...");
@@ -76,7 +76,7 @@ function mostrarMenuPrincipal() {
                 break;
 
             default: // Opción no válida
-                console.log("❌ Opción inválida.");
+                console.log("❌ Opcion invalida.");
                 rs.question("Presione ENTER para continuar...");
                 break;
         };
