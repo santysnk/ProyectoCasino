@@ -103,19 +103,19 @@ Breve explicación de qué hace la aplicación, para qué sirve y el contexto ed
 ## 🚀 Instalación
 
 1. Clona el repositorio:
-   ```markdown
+   ```
    git clone https://github.com/tu-usuario/proyecto-casino.git
 
    ```
 
 2. Instala dependencias:
 
-   ```markdown
+   ```
    npm install
    ```
 3. Asegúrate de tener creado el archivo de saldo (opcional, se creará al guardar por primera vez):
 
-   ```markdown
+   ```
    > saldo.txt
    ```
 
@@ -125,7 +125,7 @@ Breve explicación de qué hace la aplicación, para qué sirve y el contexto ed
 
 Inicia la aplicación con:
 
-```bash
+```
 npm start
 ```
 
@@ -149,11 +149,7 @@ Verás el menú principal en consola. Navega ingresando el número de opción y 
 ## 📋 Recursos del proyecto
 
 ### 🔐 Acceso al repositorio (público)  
-Solo estos colaboradores tienen acceso directo al código:  
-- **Braian Aued** (`auedBraian`)   
-- **Santiago Casal** (`santysnk`)  
-- **docentefip** (`docentefip`)  
-- **Vanina Labrunee** (`VaninaL`)  
+
 
 ### 📊 Acceso al Project Board (GitHub Projects)  
 https://github.com/users/santysnk/projects/1  
